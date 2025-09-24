@@ -72,6 +72,7 @@ function App() {
   return (
     <main>
       <header className="pt-16 z-10 relative container-responsive">
+        <Logos.Vite className="w-80 h-80 m-auto mb-20" />
         <h3 className="heading-secondary">
           <span className="text-[gold] opacity-75">Vital</span> @ Vite Template
         </h3>
@@ -92,9 +93,7 @@ function App() {
           </code>
           . Configured and ready to go.
         </p>
-        <div className="absolute top-12 right-12 opacity-10 lg:opacity-50">
-          <Logos.Vite className="w-56 h-56" />
-        </div>
+        
       </header>
       <section className="container-responsive">
         <div className="sm:flex sm:space-x-6 space-y-4 sm:space-y-0 items-center">
