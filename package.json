@@ -1,0 +1,74 @@
+{
+  "name": "vital",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "🚀 Optimized Vite + React 19 + TypeScript + Tailwind CSS 4 boilerplate template with modern tooling and best practices",
+  "keywords": [
+    "vite",
+    "react",
+    "typescript",
+    "tailwind",
+    "template",
+    "boilerplate",
+    "starter",
+    "modern",
+    "optimized",
+    "tailwind-css-4",
+    "react-19",
+    "vitest",
+    "eslint"
+  ],
+  "homepage": "https://github.com/asif7774/vital#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asif7774/vital.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asif7774/vital/issues"
+  },
+  "author": "Asif Ansari <asif.ansari7774@gmail.com>",
+  "license": "MIT",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not IE 11"
+  ],
+  "engines": {
+    "node": ">=18",
+    "yarn": ">=1.22.5"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@heroicons/react": "2.2.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.36.0",
+    "@tailwindcss/postcss": "4.1.13",
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9",
+    "@vitejs/plugin-react": "5.0.3",
+    "@vitest/ui": "^3.2.4",
+    "autoprefixer": "10.4.21",
+    "eslint": "9.36.0",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-react-refresh": "0.4.21",
+    "lint-staged": "16.2.0",
+    "postcss": "8.5.6",
+    "prettier": "3.6.2",
+    "tailwindcss": "4.1.13",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.44.1",
+    "vite": "7.1.7",
+    "vitest": "^3.2.4"
+  }
+}
