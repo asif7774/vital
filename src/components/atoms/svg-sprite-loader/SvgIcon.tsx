@@ -36,7 +36,9 @@ const SvgIcon: React.FC<SvgIconProps> = ({
 
   // Show error state
   if (error) {
-    console.warn(`SVG Icon "${name}" failed to load:`, error.message);
+    if (import.meta.env.DEV) {
+      console.warn(`SVG Icon "${name}" failed to load:`, error.message);
+    }
     return (
       <div 
         className={`bg-red-100 border border-red-300 rounded flex items-center justify-center text-red-600 text-xs ${className}`}

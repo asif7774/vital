@@ -1,8 +1,12 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from 'contexts/AuthContext';
-import NormalLayout from 'layouts/NormalLayout';
 import { SvgSpriteLoader } from 'components/atoms/svg-sprite-loader';
+
+// Lazy load layouts for better code splitting
+const NormalLayout = React.lazy(() => import('layouts/NormalLayout'));
+// AuthLayout is lazy loaded and ready to use when needed for protected routes
+// const AuthLayout = React.lazy(() => import('layouts/AuthLayout'));
 
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('pages/Home'));
@@ -15,9 +19,27 @@ const LoadingSpinner = () => (
   </div>
 );
 
+// Wrapper component for lazy-loaded layout with page
+const LazyLayoutWrapper = ({ 
+  Layout, 
+  Page 
+}: { 
+  Layout: React.LazyExoticComponent<React.ComponentType<any>>;
+  Page: React.LazyExoticComponent<React.ComponentType<any>>;
+}) => (
+  <Suspense fallback={<LoadingSpinner />}>
+    <Layout>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Page />
+      </Suspense>
+    </Layout>
+  </Suspense>
+);
+
 function App() {
   return (
     <AuthProvider>
+      {/* SvgSpriteLoader wraps Router to provide context, but loading is deferred internally */}
       <SvgSpriteLoader 
         url="/sprites/app-icons.svg" 
         version="1.0.0"
@@ -28,12 +50,20 @@ function App() {
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               {/* Public Routes */}
-              <Route path="/" element={
-                <NormalLayout>
-                  <Home />
-                </NormalLayout>
-              } />
-              <Route path="/login" element={<Login />} />
+              <Route 
+                path="/" 
+                element={
+                  <LazyLayoutWrapper Layout={NormalLayout} Page={Home} />
+                } 
+              />
+              <Route 
+                path="/login" 
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Login />
+                  </Suspense>
+                } 
+              />
               
               {/* Catch all route */}
               <Route path="*" element={<Navigate to="/" replace />} />

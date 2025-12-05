@@ -33,13 +33,14 @@ const SvgSpriteLoader: React.FC<SvgSpriteLoaderProps> = ({
   });
 
   const loadSprite = useCallback(async (spriteUrl: string, spriteVersion: string = '1.0.0') => {
+    const isDev = import.meta.env.DEV;
     try {
-      console.log(`[SvgSpriteLoader] Loading sprite: ${spriteUrl}`);
+      if (isDev) console.log(`[SvgSpriteLoader] Loading sprite: ${spriteUrl}`);
       setState({ status: 'loading' });
 
       // Check if sprite is already loaded globally (prevents duplicate loading in Strict Mode)
       if (isSpriteLoaded(spriteUrl)) {
-        console.log(`[SvgSpriteLoader] Sprite already loaded globally, skipping load (React Strict Mode)`);
+        if (isDev) console.log(`[SvgSpriteLoader] Sprite already loaded globally, skipping load (React Strict Mode)`);
         setState({ status: 'loaded' });
         onLoad?.();
         return;
@@ -47,7 +48,7 @@ const SvgSpriteLoader: React.FC<SvgSpriteLoaderProps> = ({
 
       // Check if sprite is already injected
       if (isSvgSpriteInjected()) {
-        console.log(`[SvgSpriteLoader] Sprite already injected, skipping load`);
+        if (isDev) console.log(`[SvgSpriteLoader] Sprite already injected, skipping load`);
         markSpriteAsLoaded(spriteUrl);
         setState({ status: 'loaded' });
         onLoad?.();
@@ -58,7 +59,7 @@ const SvgSpriteLoader: React.FC<SvgSpriteLoaderProps> = ({
       const cachedData = getCachedSvgSprite(spriteUrl);
       
       if (cachedData && !hasVersionChanged(spriteUrl, spriteVersion)) {
-        console.log(`[SvgSpriteLoader] Using cached sprite: ${spriteUrl}`);
+        if (isDev) console.log(`[SvgSpriteLoader] Using cached sprite: ${spriteUrl}`);
         // Use cached data
         injectSvgSprite(cachedData.data);
         markSpriteAsLoaded(spriteUrl);
@@ -67,7 +68,7 @@ const SvgSpriteLoader: React.FC<SvgSpriteLoaderProps> = ({
         return;
       }
 
-      console.log(`[SvgSpriteLoader] Loading sprite from URL: ${spriteUrl}`);
+      if (isDev) console.log(`[SvgSpriteLoader] Loading sprite from URL: ${spriteUrl}`);
       // Load from URL
       const svgData = await loadSvgSprite(spriteUrl);
       
@@ -80,12 +81,14 @@ const SvgSpriteLoader: React.FC<SvgSpriteLoaderProps> = ({
       // Mark as loaded globally
       markSpriteAsLoaded(spriteUrl);
       
-      console.log(`[SvgSpriteLoader] Successfully loaded and injected sprite: ${spriteUrl}`);
+      if (isDev) console.log(`[SvgSpriteLoader] Successfully loaded and injected sprite: ${spriteUrl}`);
       setState({ status: 'loaded' });
       onLoad?.();
     } catch (error) {
       const errorObj = error instanceof Error ? error : new Error('Unknown error occurred');
-      console.error(`[SvgSpriteLoader] Error loading sprite ${spriteUrl}:`, errorObj);
+      if (isDev || onError) {
+        console.error(`[SvgSpriteLoader] Error loading sprite ${spriteUrl}:`, errorObj);
+      }
       setState({ 
         status: 'error', 
         error: errorObj 
@@ -96,7 +99,18 @@ const SvgSpriteLoader: React.FC<SvgSpriteLoaderProps> = ({
 
   useEffect(() => {
     if (url) {
-      loadSprite(url, version);
+      // Defer sprite loading to avoid blocking initial render
+      // Use requestIdleCallback if available, otherwise setTimeout
+      const loadSpriteDeferred = () => {
+        loadSprite(url, version);
+      };
+
+      if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(loadSpriteDeferred, { timeout: 2000 });
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(loadSpriteDeferred, 0);
+      }
     }
   }, [url, version, loadSprite]);
 

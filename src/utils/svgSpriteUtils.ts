@@ -62,7 +62,9 @@ export const getCachedSvgSprite = (url: string): CachedSvgSprite | null => {
     
     return parsedData;
   } catch (error) {
-    console.warn('Failed to retrieve cached SVG sprite:', error);
+    if (import.meta.env.DEV) {
+      console.warn('Failed to retrieve cached SVG sprite:', error);
+    }
     return null;
   }
 };
@@ -88,7 +90,9 @@ export const cacheSvgSprite = (
     localStorage.setItem(cacheKey, JSON.stringify(cacheData));
     localStorage.setItem(versionKey, version);
   } catch (error) {
-    console.warn('Failed to cache SVG sprite:', error);
+    if (import.meta.env.DEV) {
+      console.warn('Failed to cache SVG sprite:', error);
+    }
   }
 };
 
@@ -103,7 +107,9 @@ export const clearCachedSvgSprite = (url: string): void => {
     localStorage.removeItem(cacheKey);
     localStorage.removeItem(versionKey);
   } catch (error) {
-    console.warn('Failed to clear cached SVG sprite:', error);
+    if (import.meta.env.DEV) {
+      console.warn('Failed to clear cached SVG sprite:', error);
+    }
   }
 };
 
@@ -117,7 +123,9 @@ export const hasVersionChanged = (url: string, newVersion: string): boolean => {
     
     return cachedVersion !== newVersion;
   } catch (error) {
-    console.warn('Failed to check version:', error);
+    if (import.meta.env.DEV) {
+      console.warn('Failed to check version:', error);
+    }
     return true;
   }
 };

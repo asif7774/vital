@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, lazy, Suspense, useMemo } from "react";
 import Logos from "components/atoms/logos";
-import Card from "components/organisms/card";
-import Button from "components/atoms/button";
 import { SvgIcon } from "components/atoms/svg-sprite-loader";
 
+// Lazy load heavy components
+const Card = lazy(() => import("components/organisms/card"));
+const Button = lazy(() => import("components/atoms/button"));
+
+// Move data outside component to avoid recreation
 const techBadges = [
   { name: "React 19", icon: "settings" },
   { name: "TypeScript 5.9", icon: "settings" },
@@ -11,7 +14,7 @@ const techBadges = [
   { name: "Vite 7", icon: "settings" },
   { name: "Vitest", icon: "wrench" },
   { name: "ESLint 9", icon: "menu" },
-];
+] as const;
 
 const features = [
   {
@@ -20,7 +23,7 @@ const features = [
       "Lightning-fast build tool with optimized development experience.",
     icon: "settings",
     docs: "https://vitejs.dev/",
-    borderColor: "border-t-purple-500",
+    borderColor: "border-t-orange-500",
   },
   {
     name: "React 19",
@@ -76,19 +79,29 @@ const features = [
   },
 ];
 
+// Memoize command to avoid recreation
+const COMMAND = "npx degit asif7774/vital my-app";
+
+// Small loading placeholder for lazy components
+const ComponentLoader = () => <div className="animate-pulse bg-gray-200 rounded h-10 w-20" />;
+
 function Home() {
   const [copied, setCopied] = useState(false);
-  const command = "npx degit asif7774/vital my-app";
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(command);
+      await navigator.clipboard.writeText(COMMAND);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error("Failed to copy:", err);
+      if (import.meta.env.DEV) {
+        console.error("Failed to copy:", err);
+      }
     }
   };
+
+  // Memoize features to avoid recreation on re-renders
+  const memoizedFeatures = useMemo(() => features, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-purple-600 via-purple-500 to-blue-600">
@@ -127,20 +140,22 @@ function Home() {
         {/* Call-to-Action Buttons */}
         <div className="flex flex-col gap-4 justify-center items-center mb-16">
           <a href="https://github.com/asif7774/vital">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
-              <SvgIcon
-                name="external-link"
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="text-white"
-                aria-hidden={true}
-              />
-              Visit on Github
-            </Button>
+            <Suspense fallback={<ComponentLoader />}>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+                <SvgIcon
+                  name="external-link"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="text-white"
+                  aria-hidden={true}
+                />
+                Visit on Github
+              </Button>
+            </Suspense>
           </a>
           
           {/* Command Input with Copy Button */}
@@ -149,7 +164,7 @@ function Home() {
               <input
                 type="text"
                 readOnly
-                value={command}
+                value={COMMAND}
                 className="w-full px-4 py-3 pr-24 bg-white/30 backdrop-blur-sm border border-white/30 rounded-lg text-white font-mono text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/60"
                 aria-label="Command to install Vital"
               />
@@ -213,22 +228,30 @@ function Home() {
         </div>
       </header>
 
-      {/* Features Section */}
+      {/* Features Section - Lazy loaded for better performance */}
       <section className="container-responsive pb-16">
         <h2 className="sr-only">Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {features.map((props, index) => (
-            <article key={index}>
-              <Card
-                title={props.name}
-                description={props.description}
-                icon={props.icon}
-                href={props.docs}
-                borderColor={props.borderColor}
-              />
-            </article>
-          ))}
-        </div>
+        <Suspense fallback={
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="animate-pulse bg-white rounded-lg h-48" />
+            ))}
+          </div>
+        }>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {memoizedFeatures.map((props, index) => (
+              <article key={index}>
+                <Card
+                  title={props.name}
+                  description={props.description}
+                  icon={props.icon}
+                  href={props.docs}
+                  borderColor={props.borderColor}
+                />
+              </article>
+            ))}
+          </div>
+        </Suspense>
       </section>
 
       {/* Footer */}

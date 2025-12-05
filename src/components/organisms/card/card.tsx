@@ -1,6 +1,7 @@
 import {
   forwardRef,
   ComponentProps,
+  memo,
 } from "react";
 import { SvgIcon } from "components/atoms/svg-sprite-loader";
 
@@ -13,7 +14,7 @@ export interface CardProps
   borderColor?: string;
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>(
+const Card = memo(forwardRef<HTMLDivElement, CardProps>(
   ({ title, description, icon, href, borderColor = "border-t-blue-500", ...rest }, ref) => {
     return (
       <div
@@ -51,6 +52,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       </div>
     );
   }
-);
+));
+
+Card.displayName = "Card";
 
 export default Card;

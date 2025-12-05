@@ -2,9 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Defer non-critical resources - load after page is interactive -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Manifest is deferred to avoid blocking critical rendering path -->
+    <script>
+      // Load manifest asynchronously after page is interactive
+      (function() {
+        function loadManifest() {
+          const link = document.createElement('link');
+          link.rel = 'manifest';
+          link.href = '/manifest.webmanifest';
+          document.head.appendChild(link);
+        }
+        // Wait for page to be interactive before loading manifest
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            // Defer further to avoid blocking - use requestIdleCallback if available
+            if (window.requestIdleCallback) {
+              window.requestIdleCallback(loadManifest, { timeout: 2000 });
+            } else {
+              setTimeout(loadManifest, 100);
+            }
+          });
+        } else {
+          if (window.requestIdleCallback) {
+            window.requestIdleCallback(loadManifest, { timeout: 2000 });
+          } else {
+            setTimeout(loadManifest, 100);
+          }
+        }
+      })();
+    </script>
     
     <!-- SEO Meta Tags -->
     <title>React + TypeScript + Tailwind @ Vite Template</title>
@@ -17,16 +47,11 @@
     <meta property="og:description" content="Create modern React apps with Vital (speed)" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://github.com/asif7774/vital" />
-    <meta property="og:image" content="/og-image.jpg" />
     
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="React + TypeScript + Tailwind @ Vite Template" />
     <meta name="twitter:description" content="Create modern React apps with Vital (speed)" />
-    <meta name="twitter:image" content="/og-image.jpg" />
-    
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="//images.unsplash.com" />
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#2563eb" />
@@ -42,6 +67,34 @@
     
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script src="/performance-monitor.js" defer></script>
+    <!-- Performance monitor loads only in development or with ?perf query param -->
+    <script>
+      (function() {
+        // Only load performance monitor if explicitly requested via query param
+        // or if running on localhost (development)
+        const urlParams = new URLSearchParams(window.location.search);
+        const shouldLoadPerf = urlParams.has('perf');
+        const isLocalhost = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' ||
+                          window.location.hostname === '';
+        
+        if (shouldLoadPerf || isLocalhost) {
+          // Defer loading until after page is interactive to avoid blocking
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadPerfMonitor);
+          } else {
+            // Page already loaded, defer with setTimeout
+            setTimeout(loadPerfMonitor, 100);
+          }
+        }
+        
+        function loadPerfMonitor() {
+          const script = document.createElement('script');
+          script.src = '/performance-monitor.js';
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+      })();
+    </script>
   </body>
 </html>
