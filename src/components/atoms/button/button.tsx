@@ -1,18 +1,21 @@
 import { forwardRef, ComponentProps } from "react";
 
-const Button = forwardRef<
-  HTMLButtonElement,
-  Omit<ComponentProps<"button">, "className">
->(({ children, ...rest }, ref) => {
-  return (
-    <button
-      ref={ref}
-      className="btn-primary"
-      {...rest}
-    >
-      {children}
-    </button>
-  );
-});
+interface ButtonProps extends Omit<ComponentProps<"button">, "className"> {
+  className?: string;
+}
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, className = "btn-primary", ...rest }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={className}
+        {...rest}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 
 export default Button;

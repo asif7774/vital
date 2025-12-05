@@ -1,46 +1,48 @@
 import {
   forwardRef,
   ComponentProps,
-  RefAttributes,
-  ForwardRefExoticComponent,
-  SVGProps,
 } from "react";
+import { SvgIcon } from "components/atoms/svg-sprite-loader";
 
 export interface CardProps
   extends Omit<ComponentProps<"div">, "className" | "children"> {
   title: string;
   description: string;
-  Icon: ForwardRefExoticComponent<
-    Omit<SVGProps<SVGSVGElement>, "ref"> & {
-      title?: string | undefined;
-      titleId?: string | undefined;
-    } & RefAttributes<SVGSVGElement>
-  >;
+  icon: string;
   href: string;
+  borderColor?: string;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ title, description, Icon, href, ...rest }, ref) => {
+  ({ title, description, icon, href, borderColor = "border-t-blue-500", ...rest }, ref) => {
     return (
       <div
         ref={ref}
-        className="card hover-lift"
+        className={`bg-white rounded-lg shadow-lg p-6 relative overflow-hidden h-full transition-all duration-300 hover:shadow-xl ${borderColor} border-t-4`}
         {...rest}
       >
-        <div>
-          <span className="absolute right-3 bottom-3 flex items-center justify-center rounded-md opacity-10">
-            <Icon className="h-12 w-12 text-white" aria-hidden="true" />
-          </span>
+        <div className="absolute right-4 top-4">
+          <SvgIcon 
+            name={icon} 
+            viewBox="0 0 24 24" 
+            width="32" 
+            height="32" 
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="text-gray-400" 
+            aria-hidden={true} 
+          />
         </div>
-        <div className="flex flex-col h-full">
-          <h3 className="card-header">{title}</h3>
-          <p className="card-body">{description}</p>
-          <div className="card-footer">
+        <div className="flex flex-col h-full pr-12">
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">{title}</h3>
+          <p className="text-base text-gray-600 flex-1 leading-relaxed mb-4">{description}</p>
+          <div className="mt-auto">
             <a
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="card-link"
+              className="text-blue-600 font-semibold hover:text-blue-700 hover:underline transition-colors"
             >
               Visit documentation →
             </a>

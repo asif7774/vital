@@ -4,25 +4,16 @@
   html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
 
-  @keyframes slide {
-    100% {
-      background-position: 50px 0, 125px 25px;
-    }
+  body {
+    font-display: swap;
   }
 
+  /* Remove the animated background from main as it's not used in our app */
   main {
-    @apply px-4 min-h-screen space-y-16 w-full bg-gray-900;
-    background-image: radial-gradient(
-        hsla(0, 0%, 84.3%, 0.25) 1px,
-        transparent 0
-      ),
-      radial-gradient(hsla(0, 0%, 84.3%, 0.1) 1px, transparent 0);
-    background-size: 50px 50px;
-    background-position: 0 0, 25px 25px;
-    -webkit-animation: slide 2s linear infinite;
-    animation: slide 4s linear infinite;
+    @apply min-h-screen w-full;
   }
 }
 
@@ -46,7 +37,7 @@
   }
   
   .card-body {
-    @apply text-base text-gray-300 flex-1 leading-relaxed;
+    @apply text-base text-black flex-1 leading-relaxed;
   }
   
   .card-footer {
@@ -85,6 +76,36 @@
 }
 
 @layer utilities {
+  /* Animation keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes bounceGentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
   /* Animation utilities */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;
@@ -110,5 +131,78 @@
   
   .hover-glow {
     @apply transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25;
+  }
+  
+  /* Accessibility utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  
+  /* Skip links for accessibility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 4px;
+    z-index: 100;
+    background: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: top 0.2s ease-in-out;
+  }
+  
+  .skip-link:focus {
+    top: 4px;
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  .skip-link-second:focus {
+    top: 60px;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .text-gray-600 {
+      color: #000000;
+    }
+    
+    .text-gray-500 {
+      color: #000000;
+    }
+    
+    .border-gray-300 {
+      border-color: #000000;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

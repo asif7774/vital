@@ -1,15 +1,30 @@
 {
   "short_name": "Vital",
-  "name": "Starter template for Vite with React (TypeScript). Supports Tailwind with CSS-Modules. Jest and @react/testing-library configured and ready to go. Also ESLint, Prettier, Husky, Commit-lint and Atomic Design for components.",
+  "name": "Vital - Modern React Boilerplate Template",
+  "description": "A modern React boilerplate template with React 19, TypeScript, Tailwind CSS 4, and all the tools you need to build amazing applications.",
   "icons": [
     {
       "src": "favicon.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#111827",
-  "background_color": "#111827"
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "utilities"],
+  "lang": "en"
 }

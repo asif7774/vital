@@ -24,7 +24,7 @@ Create modern React apps with <b>Vital</b><sup><em>(speed)</em></sup><br>
 - 🚀 [Vite 7](https://vitejs.dev/) - Lightning-fast build tool
 - 👑 [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) - Component organization
 - 🗂 [Path Aliases](https://github.com/vitejs/vite/issues/88#issuecomment-762415200) - Clean imports
-- 😃 [Hero Icons](https://heroicons.com/) - Beautiful SVG icons
+- 🎨 [SVG Sprites](SVG_SPRITE_GUIDE.md) - Optimized SVG sprite system with caching
 - 🧪 [Vitest](https://vitest.dev/) - Fast unit testing
 - ☁️ [Netlify](https://www.netlify.com/) - Zero-config deployment
 
