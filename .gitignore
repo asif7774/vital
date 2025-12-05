@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# Firebase Studio
+.idx
+
 # production
 /build
 /dist
