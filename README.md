@@ -26,6 +26,7 @@ Create modern React apps with <b>Vital</b><sup><em>(speed)</em></sup><br>
 - 🗂 [Path Aliases](https://github.com/vitejs/vite/issues/88#issuecomment-762415200) - Clean imports
 - 🎨 [SVG Sprites](SVG_SPRITE_GUIDE.md) - Optimized SVG sprite system with caching
 - 🧪 [Vitest](https://vitest.dev/) - Fast unit testing
+- 🎭 [Playwright](https://playwright.dev/) - End-to-end testing
 - ☁️ [Netlify](https://www.netlify.com/) - Zero-config deployment
 
 ### 🎨 Tailwind CSS 4 Optimizations
@@ -97,11 +98,17 @@ The built files will be in the `dist` directory.
 
 ### Testing
 
-Run tests:
+This project uses two types of tests:
+
+- **Unit & Integration Tests:** Powered by `vitest`, these tests check individual components and functions.
+- **End-to-End (E2E) Tests:** Powered by `Playwright`, these tests simulate real user interactions in a browser.
+
+Run the tests using these commands:
 
 ```bash
-npm run test        # Run tests once
-npm run test:ui     # Run tests with UI
+npm run test        # Run unit/integration tests once
+npm run test:ui     # Run unit/integration tests with UI
+npm run test:e2e    # Run end-to-end tests
 ```
 
 ### Linting
@@ -161,6 +168,8 @@ All packages are updated to their latest versions:
 - **Vite**: 7.1.7
 - **ESLint**: 9.36.0
 - **Vitest**: 3.2.4
+- **Playwright**: 1.57.0
+
 
 ## 🎯 Why Vital?
 
