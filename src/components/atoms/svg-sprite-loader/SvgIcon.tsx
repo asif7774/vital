@@ -22,12 +22,12 @@ const SvgIcon: React.FC<SvgIconProps> = ({
   // Show loading state
   if (isLoading) {
     return (
-      <div 
+      <div
         className={`animate-pulse bg-gray-200 rounded ${className}`}
-        style={{ 
+        style={{
           width: typeof width === 'number' ? `${width}px` : width,
           height: typeof height === 'number' ? `${height}px` : height,
-          ...style 
+          ...style
         }}
         aria-hidden="true"
       />
@@ -40,15 +40,15 @@ const SvgIcon: React.FC<SvgIconProps> = ({
       console.warn(`SVG Icon "${name}" failed to load:`, error.message);
     }
     return (
-      <div 
+      <div
         className={`bg-red-100 border border-red-300 rounded flex items-center justify-center text-red-600 text-xs ${className}`}
-        style={{ 
+        style={{
           width: typeof width === 'number' ? `${width}px` : width,
           height: typeof height === 'number' ? `${height}px` : height,
-          ...style 
+          ...style
         }}
         title={`Failed to load icon: ${name}`}
-        aria-label={ariaLabel || `Failed to load icon: ${name}`}
+        aria-label={ariaLabel ?? `Failed to load icon: ${name}`}
       >
         ?
       </div>
@@ -58,15 +58,15 @@ const SvgIcon: React.FC<SvgIconProps> = ({
   // Show fallback if sprite not loaded
   if (!isLoaded) {
     return (
-      <div 
+      <div
         className={`bg-gray-100 border border-gray-300 rounded flex items-center justify-center text-gray-600 text-xs ${className}`}
-        style={{ 
+        style={{
           width: typeof width === 'number' ? `${width}px` : width,
           height: typeof height === 'number' ? `${height}px` : height,
-          ...style 
+          ...style
         }}
         title={`Icon not available: ${name}`}
-        aria-label={ariaLabel || `Icon not available: ${name}`}
+        aria-label={ariaLabel ?? `Icon not available: ${name}`}
       >
         ?
       </div>

@@ -30,27 +30,30 @@ const Navigation: React.FC<NavigationProps> = ({ isSidebar = false }) => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const baseClasses = isSidebar 
-    ? "space-y-1" 
+  const baseClasses = isSidebar
+    ? "space-y-1"
     : "flex space-x-8";
 
   const linkClasses = (active: boolean) => {
     const base = isSidebar
       ? "group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors"
       : "px-3 py-2 rounded-md text-sm font-medium transition-colors";
-    
-    const activeStyles = active
-      ? isSidebar
+
+    let activeStyles: string;
+    if (active) {
+      activeStyles = isSidebar
         ? "bg-blue-100 text-blue-900"
-        : "text-blue-600 bg-blue-50"
-      : isSidebar
+        : "text-blue-600 bg-blue-50";
+    } else {
+      activeStyles = isSidebar
         ? "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
         : "text-gray-700 hover:text-blue-600 hover:bg-gray-50";
-    
+    }
+
     return `${base} ${activeStyles}`;
   };
 
-  const iconClasses = isSidebar 
+  const iconClasses = isSidebar
     ? "mr-3 h-5 w-5 flex-shrink-0"
     : "hidden";
 
@@ -58,7 +61,7 @@ const Navigation: React.FC<NavigationProps> = ({ isSidebar = false }) => {
     <nav className={baseClasses}>
       {navigation.map((item) => {
         const active = isActive(item.href);
-        
+
         return (
           <Link
             key={item.name}

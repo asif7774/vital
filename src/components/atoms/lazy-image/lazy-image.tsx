@@ -38,7 +38,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
       observer.observe(imgRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => { observer.disconnect(); };
   }, []);
 
   const handleLoad = () => {

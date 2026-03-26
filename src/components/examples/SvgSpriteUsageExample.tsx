@@ -10,6 +10,7 @@ import { SvgIcon } from '../atoms/svg-sprite-loader';
 
 const SvgSpriteUsageExample: React.FC = () => {
   const handleIconClick = (iconName: string) => {
+    // eslint-disable-next-line no-console
     console.log(`Clicked on ${iconName} icon`);
   };
 
@@ -31,11 +32,11 @@ const SvgSpriteUsageExample: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {['home', 'user', 'settings', 'search', 'menu', 'close'].map((iconName) => (
             <div key={iconName} className="flex flex-col items-center space-y-2">
-              <SvgIcon 
-                name={iconName} 
-                viewBox="0 0 24 24" 
-                width="32" 
-                height="32" 
+              <SvgIcon
+                name={iconName}
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
                 fill="currentColor"
                 className="text-blue-600"
               />
@@ -51,11 +52,11 @@ const SvgSpriteUsageExample: React.FC = () => {
         <div className="flex items-center space-x-6">
           {[16, 24, 32, 48, 64].map((size) => (
             <div key={size} className="flex flex-col items-center space-y-2">
-              <SvgIcon 
-                name="star" 
-                viewBox="0 0 24 24" 
-                width={size} 
-                height={size} 
+              <SvgIcon
+                name="star"
+                viewBox="0 0 24 24"
+                width={size}
+                height={size}
                 fill="currentColor"
                 className="text-yellow-500"
               />
@@ -78,11 +79,11 @@ const SvgSpriteUsageExample: React.FC = () => {
             { color: 'text-pink-500', name: 'Pink' },
           ].map(({ color, name }) => (
             <div key={name} className="flex flex-col items-center space-y-2">
-              <SvgIcon 
-                name="heart" 
-                viewBox="0 0 24 24" 
-                width="32" 
-                height="32" 
+              <SvgIcon
+                name="heart"
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
                 fill="currentColor"
                 className={color}
               />
@@ -105,14 +106,14 @@ const SvgSpriteUsageExample: React.FC = () => {
             { name: 'share', label: 'Share' },
           ].map(({ name, label }) => (
             <div key={name} className="flex flex-col items-center space-y-2">
-              <SvgIcon 
-                name={name} 
-                viewBox="0 0 24 24" 
-                width="32" 
-                height="32" 
+              <SvgIcon
+                name={name}
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
                 fill="currentColor"
                 className="text-gray-600 hover:text-blue-600 cursor-pointer transition-colors"
-                onClick={() => handleIconClick(name)}
+                onClick={() => { handleIconClick(name); }}
               />
               <span className="text-sm text-gray-600">{label}</span>
             </div>
@@ -133,11 +134,11 @@ const SvgSpriteUsageExample: React.FC = () => {
             { name: 'warning', color: 'text-orange-500', label: 'Caution' },
           ].map(({ name, color, label }) => (
             <div key={name} className="flex flex-col items-center space-y-2">
-              <SvgIcon 
-                name={name} 
-                viewBox="0 0 24 24" 
-                width="32" 
-                height="32" 
+              <SvgIcon
+                name={name}
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
                 fill="currentColor"
                 className={color}
               />
@@ -160,14 +161,14 @@ const SvgSpriteUsageExample: React.FC = () => {
             { name: 'refresh', label: 'Refresh' },
           ].map(({ name, label }) => (
             <div key={name} className="flex flex-col items-center space-y-2">
-              <SvgIcon 
-                name={name} 
-                viewBox="0 0 24 24" 
-                width="32" 
-                height="32" 
+              <SvgIcon
+                name={name}
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
                 fill="currentColor"
                 className="text-gray-600 hover:text-blue-600 cursor-pointer transition-colors"
-                onClick={() => handleIconClick(name)}
+                onClick={() => { handleIconClick(name); }}
               />
               <span className="text-sm text-gray-600">{label}</span>
             </div>
@@ -181,14 +182,14 @@ const SvgSpriteUsageExample: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Glow Effect */}
           <div className="flex flex-col items-center space-y-2 p-4 bg-gray-50 rounded-lg">
-            <SvgIcon 
-              name="star-filled" 
-              viewBox="0 0 24 24" 
-              width="48" 
-              height="48" 
+            <SvgIcon
+              name="star-filled"
+              viewBox="0 0 24 24"
+              width="48"
+              height="48"
               fill="currentColor"
               className="text-yellow-500"
-              style={{ 
+              style={{
                 filter: 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.5))',
                 animation: 'pulse 2s infinite'
               }}
@@ -197,12 +198,12 @@ const SvgSpriteUsageExample: React.FC = () => {
           </div>
 
           {/* Gradient Background */}
-          <div className="flex flex-col items-center space-y-2 p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-            <SvgIcon 
-              name="heart-filled" 
-              viewBox="0 0 24 24" 
-              width="48" 
-              height="48" 
+          <div className="flex flex-col items-center space-y-2 p-4 bg-linear-to-r from-blue-500 to-purple-600 rounded-lg">
+            <SvgIcon
+              name="heart-filled"
+              viewBox="0 0 24 24"
+              width="48"
+              height="48"
               fill="currentColor"
               className="text-white"
             />
@@ -211,14 +212,14 @@ const SvgSpriteUsageExample: React.FC = () => {
 
           {/* Rotating Icon */}
           <div className="flex flex-col items-center space-y-2 p-4 bg-gray-50 rounded-lg">
-            <SvgIcon 
-              name="refresh" 
-              viewBox="0 0 24 24" 
-              width="48" 
-              height="48" 
+            <SvgIcon
+              name="refresh"
+              viewBox="0 0 24 24"
+              width="48"
+              height="48"
               fill="currentColor"
               className="text-blue-500"
-              style={{ 
+              style={{
                 animation: 'spin 1s linear infinite'
               }}
             />
@@ -232,7 +233,7 @@ const SvgSpriteUsageExample: React.FC = () => {
         <h2 className="text-2xl font-semibold text-gray-800">Code Examples</h2>
         <div className="bg-gray-900 rounded-lg p-6 overflow-x-auto">
           <pre className="text-green-400 text-sm">
-{`// Basic usage
+            {`// Basic usage
 <SvgIcon 
   name="home" 
   viewBox="0 0 24 24" 

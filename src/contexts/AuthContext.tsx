@@ -16,6 +16,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
@@ -37,19 +38,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Simple validation for demo purposes
       if (email === 'admin@example.com' && password === 'password') {
         setUser({
           id: '1',
           name: 'Admin User',
-          email: email
+          email
         });
         return true;
       }
       return false;
-    } catch (error) {
-      console.error('Login error:', error);
+    } catch (_error) {
+      console.error('Login error:', _error);
       return false;
     } finally {
       setLoading(false);

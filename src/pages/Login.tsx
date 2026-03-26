@@ -26,21 +26,23 @@ const Login: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
-    
+
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields');
       return;
     }
 
-    const success = await login(formData.email, formData.password);
-    if (success) {
-      navigate('/dashboard');
-    } else {
-      setError('Invalid email or password');
-    }
+    void (async () => {
+      const success = await login(formData.email, formData.password);
+      if (success) {
+        navigate('/dashboard');
+      } else {
+        setError('Invalid email or password');
+      }
+    })();
   };
 
   return (
@@ -60,7 +62,7 @@ const Login: React.FC = () => {
             </a>
           </p>
         </header>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit} aria-label="Login form">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -101,7 +103,7 @@ const Login: React.FC = () => {
               <button
                 type="button"
                 className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => { setShowPassword(!showPassword); }}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? (

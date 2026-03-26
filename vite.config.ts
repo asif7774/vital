@@ -38,12 +38,12 @@ export default defineConfig(() => {
               }
               return 'vendor';
             }
-            
+
             // Split layouts into separate chunks
             if (id.includes('/layouts/')) {
               return 'layouts';
             }
-            
+
             // Split pages into separate chunks (each page gets its own chunk)
             if (id.includes('/pages/')) {
               const pageName = id.split('/pages/')[1]?.split('/')[0];
@@ -51,22 +51,22 @@ export default defineConfig(() => {
                 return `page-${pageName.toLowerCase()}`;
               }
             }
-            
+
             // Split organisms (heavy components) into separate chunk
             if (id.includes('/components/organisms/')) {
               return 'components-organisms';
             }
-            
+
             // Split contexts into separate chunk
             if (id.includes('/contexts/')) {
               return 'contexts';
             }
-            
+
             // Split SVG sprite loader into separate chunk
             if (id.includes('/components/atoms/svg-sprite-loader/')) {
               return 'components-svg-sprite';
             }
-            
+
             // Exclude demo and example components from production build
             if (id.includes('/demo/') || id.includes('/examples/')) {
               return null;
@@ -82,10 +82,6 @@ export default defineConfig(() => {
             }
             return 'assets/[ext]/[name]-[hash].[ext]';
           },
-        },
-        treeshake: {
-          moduleSideEffects: false,
-          preset: 'recommended',
         },
       },
       target: 'esnext',

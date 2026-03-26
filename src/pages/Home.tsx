@@ -92,7 +92,7 @@ function Home() {
     try {
       await navigator.clipboard.writeText(COMMAND);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => { setCopied(false); }, 2000);
     } catch (err) {
       if (import.meta.env.DEV) {
         console.error("Failed to copy:", err);
@@ -104,7 +104,7 @@ function Home() {
   const memoizedFeatures = useMemo(() => features, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-purple-600 via-purple-500 to-blue-600">
+    <main className="min-h-screen bg-linear-to-b from-purple-600 via-purple-500 to-blue-600">
       <header className="pt-16 z-10 relative container-responsive text-center">
         <Logos.Vite className="w-80 h-80 m-auto mb-8" />
         <h1 className="text-6xl lg:text-7xl font-extrabold text-white mb-4">
@@ -113,7 +113,7 @@ function Home() {
         <h2 className="text-2xl sm:text-3xl text-white/90 mb-8 font-medium">
           The Ultimate React + TypeScript + Tailwind Boilerplate
         </h2>
-        
+
         {/* Technology Badges */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           {techBadges.map((tech, index) => (
@@ -157,7 +157,7 @@ function Home() {
               </Button>
             </Suspense>
           </a>
-          
+
           {/* Command Input with Copy Button */}
           <div className="flex flex-col sm:flex-row gap-2 w-full max-w-2xl">
             <div className="flex-1 relative">
@@ -169,7 +169,7 @@ function Home() {
                 aria-label="Command to install Vital"
               />
               <button
-                onClick={handleCopy}
+                onClick={() => { void handleCopy(); }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-md font-semibold text-sm shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
                 aria-label="Copy command to clipboard"
               >
@@ -207,7 +207,7 @@ function Home() {
               </button>
             </div>
           </div>
-          
+
           {/* Toast Notification */}
           {copied && (
             <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-2 z-50 animate-slide-up">

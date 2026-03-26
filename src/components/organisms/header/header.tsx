@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 import { SvgIcon } from 'components/atoms/svg-sprite-loader';
-import { useState } from 'react';
 
 const Header: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -16,7 +15,7 @@ const Header: React.FC = () => {
     { name: 'SVG Demo', href: '/svg-demo', requiresAuth: false, icon: 'wrench' },
   ];
 
-  const filteredNavigation = navigation.filter(item => 
+  const filteredNavigation = navigation.filter(item =>
     !item.requiresAuth || isAuthenticated
   );
 
@@ -27,19 +26,19 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link 
-              to={isAuthenticated ? '/dashboard' : '/'} 
+          <div className="shrink-0">
+            <Link
+              to={isAuthenticated ? '/dashboard' : '/'}
               className="flex items-center"
               aria-label="Vital Home"
             >
-              <SvgIcon 
-                name="logo" 
-                viewBox="0 0 24 24" 
-                width="32" 
-                height="32" 
-                className="text-blue-600" 
-                aria-hidden={true} 
+              <SvgIcon
+                name="logo"
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
+                className="text-blue-600"
+                aria-hidden={true}
               />
               <span className="ml-2 text-xl font-bold text-gray-900">Vital</span>
             </Link>
@@ -51,11 +50,10 @@ const Header: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center ${
-                  isActive(item.href)
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center ${isActive(item.href)
                     ? 'text-blue-600 bg-blue-50'
                     : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                }`}
+                  }`}
                 aria-current={isActive(item.href) ? 'page' : undefined}
               >
                 <SvgIcon name={item.icon} viewBox="0 0 24 24" width="16" height="16" className="mr-2" />
@@ -98,7 +96,7 @@ const Header: React.FC = () => {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen); }}
               className="p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md"
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
@@ -121,12 +119,11 @@ const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-3 py-2 rounded-md text-base font-medium flex items-center ${
-                    isActive(item.href)
+                  className={`px-3 py-2 rounded-md text-base font-medium flex items-center ${isActive(item.href)
                       ? 'text-blue-600 bg-blue-50'
                       : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                    }`}
+                  onClick={() => { setIsMobileMenuOpen(false); }}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                 >
                   <SvgIcon name={item.icon} viewBox="0 0 24 24" width="20" height="20" className="mr-3" />
@@ -159,7 +156,7 @@ const Header: React.FC = () => {
                   <Link
                     to="/login"
                     className="block px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-md"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => { setIsMobileMenuOpen(false); }}
                   >
                     Login
                   </Link>
