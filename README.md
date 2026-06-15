@@ -18,6 +18,7 @@ Create modern React apps with <b>Vital</b><sup><em>(speed)</em></sup><br>
 
 ## ✨ Features
 
+- 🧩 **Accessible UI Components** - Zero-dependency, WCAG-compliant components (Modal, Toast, Tabs, Dropdown, Tooltip) built with modern HTML5 APIs and React Portals.
 - ⚡️ [React 19](https://react.dev) - Latest React with modern patterns
 - 🦾 [TypeScript 6](https://www.typescriptlang.org/) - Strict typing with latest features
 - 🎨 [Tailwind CSS 4](https://tailwindcss.com/) - Next-gen utility-first CSS with optimized setup
