@@ -19,9 +19,9 @@ Create modern React apps with <b>Vital</b><sup><em>(speed)</em></sup><br>
 ## ✨ Features
 
 - ⚡️ [React 19](https://react.dev) - Latest React with modern patterns
-- 🦾 [TypeScript 5.9](https://www.typescriptlang.org/) - Strict typing with latest features
+- 🦾 [TypeScript 6](https://www.typescriptlang.org/) - Strict typing with latest features
 - 🎨 [Tailwind CSS 4](https://tailwindcss.com/) - Next-gen utility-first CSS with optimized setup
-- 🚀 [Vite 7](https://vitejs.dev/) - Lightning-fast build tool
+- 🚀 [Vite 8](https://vitejs.dev/) - Lightning-fast build tool
 - 👑 [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) - Component organization
 - 🗂 [Path Aliases](https://github.com/vitejs/vite/issues/88#issuecomment-762415200) - Clean imports
 - 🎨 [SVG Sprites](SVG_SPRITE_GUIDE.md) - Optimized SVG sprite system with caching
@@ -37,8 +37,8 @@ Create modern React apps with <b>Vital</b><sup><em>(speed)</em></sup><br>
 
 ### 🛠 Development Tools
 
-- [ESLint 9](https://eslint.org/) - Latest linting with React/TypeScript rules
-- [Prettier 3.6](https://prettier.io/) - Code formatting
+- [ESLint 10](https://eslint.org/) - Latest linting with React/TypeScript rules
+- [Prettier 3.8](https://prettier.io/) - Code formatting
 - [TypeScript ESLint](https://typescript-eslint.io/) - TypeScript-specific linting
 - [Lint-staged](https://github.com/okonet/lint-staged) - Pre-commit hooks
 - [PostCSS](https://postcss.org/) - CSS processing with Autoprefixer
@@ -83,7 +83,7 @@ Start the development server:
 npm run dev
 ```
 
-Visit http://localhost:3000/ to see your app.
+Visit http://localhost:5200/ to see your app.
 
 ### Build
 
@@ -155,12 +155,13 @@ This template includes optimized Tailwind CSS 4 setup with:
 
 All packages are updated to their latest versions:
 
-- **React**: 19.1.1
-- **TypeScript**: 5.9.2
-- **Tailwind CSS**: 4.1.13
-- **Vite**: 7.1.7
-- **ESLint**: 9.36.0
-- **Vitest**: 3.2.4
+- **React**: 19.2.7
+- **TypeScript**: 6.0.3
+- **Tailwind CSS**: 4.3.1
+- **Vite**: 8.0.16
+- **ESLint**: 10.5.0
+- **Vitest**: 4.1.8
+- **React Router**: 7.17.0
 
 ## 🎯 Why Vital?
 
@@ -169,7 +170,7 @@ I created this template because setting up modern React projects with all the la
 **Vital** provides:
 - ⚡️ **Zero-config setup** - Everything works out of the box
 - 🎨 **Optimized Tailwind CSS 4** - Latest features with component classes
-- 🚀 **Latest tooling** - React 19, TypeScript 5.9, Vite 7
+- 🚀 **Latest tooling** - React 19, TypeScript 6, Vite 8
 - 📦 **One command** - `npx degit asif7774/vital my-app` and you're ready to code
 - 🛠 **Best practices** - ESLint, Prettier, testing, and more
 

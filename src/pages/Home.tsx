@@ -9,16 +9,16 @@ const Button = lazy(() => import("components/atoms/button"));
 // Move data outside component to avoid recreation
 const techBadges = [
   { name: "React 19", icon: "settings" },
-  { name: "TypeScript 5.9", icon: "settings" },
+  { name: "TypeScript 6", icon: "settings" },
   { name: "Tailwind CSS 4", icon: "settings" },
-  { name: "Vite 7", icon: "settings" },
-  { name: "Vitest", icon: "wrench" },
-  { name: "ESLint 9", icon: "menu" },
+  { name: "Vite 8", icon: "settings" },
+  { name: "Vitest 4", icon: "wrench" },
+  { name: "ESLint 10", icon: "menu" },
 ] as const;
 
 const features = [
   {
-    name: "Vite 7",
+    name: "Vite 8",
     description:
       "Lightning-fast build tool with optimized development experience.",
     icon: "settings",
@@ -33,9 +33,8 @@ const features = [
     borderColor: "border-t-blue-500",
   },
   {
-    name: "TypeScript 5.9",
-    description:
-      "Latest TypeScript with strict typing and modern features.",
+    name: "TypeScript 6",
+    description: "Latest TypeScript with strict typing and modern features.",
     icon: "star",
     docs: "https://www.typescriptlang.org/",
     borderColor: "border-t-green-500",
@@ -48,14 +47,14 @@ const features = [
     borderColor: "border-t-cyan-500",
   },
   {
-    name: "Vitest",
+    name: "Vitest 4",
     description: "Fast unit testing framework with modern features.",
     icon: "wrench",
     docs: "https://vitest.dev/",
     borderColor: "border-t-blue-600",
   },
   {
-    name: "ESLint 9",
+    name: "ESLint 10",
     description: "Latest linting with React/TypeScript rules.",
     icon: "menu",
     docs: "https://eslint.org/",
@@ -63,8 +62,7 @@ const features = [
   },
   {
     name: "Component Classes",
-    description:
-      "Pre-built Tailwind component classes for faster development.",
+    description: "Pre-built Tailwind component classes for faster development.",
     icon: "settings",
     docs: "https://tailwindcss.com/docs/adding-custom-styles#using-css",
     borderColor: "border-t-purple-500",
@@ -83,7 +81,9 @@ const features = [
 const COMMAND = "npx degit asif7774/vital my-app";
 
 // Small loading placeholder for lazy components
-const ComponentLoader = () => <div className="animate-pulse bg-gray-200 rounded h-10 w-20" />;
+const ComponentLoader = () => (
+  <div className="animate-pulse bg-gray-200 rounded h-10 w-20" />
+);
 
 function Home() {
   const [copied, setCopied] = useState(false);
@@ -92,7 +92,9 @@ function Home() {
     try {
       await navigator.clipboard.writeText(COMMAND);
       setCopied(true);
-      setTimeout(() => { setCopied(false); }, 2000);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
     } catch (err) {
       if (import.meta.env.DEV) {
         console.error("Failed to copy:", err);
@@ -128,14 +130,20 @@ function Home() {
                 className="text-white"
                 aria-hidden={true}
               />
-              <span className="text-white font-semibold text-sm">{tech.name}</span>
+              <span className="text-white font-semibold text-sm">
+                {tech.name}
+              </span>
             </div>
           ))}
         </div>
 
         {/* Call-to-Action Buttons */}
         <div className="flex flex-col gap-4 justify-center items-center mb-16">
-          <a href="https://github.com/asif7774/vital" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/asif7774/vital"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Suspense fallback={<ComponentLoader />}>
               <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
                 <SvgIcon
@@ -164,7 +172,9 @@ function Home() {
                 aria-label="Command to install Vital"
               />
               <button
-                onClick={() => { void handleCopy(); }}
+                onClick={() => {
+                  void handleCopy();
+                }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-md font-semibold text-sm shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
                 aria-label="Copy command to clipboard"
               >
@@ -223,13 +233,18 @@ function Home() {
       {/* Features Section - Lazy loaded for better performance */}
       <section className="container-responsive pb-16">
         <h2 className="sr-only">Features</h2>
-        <Suspense fallback={
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="animate-pulse bg-white rounded-lg h-48" />
-            ))}
-          </div>
-        }>
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="animate-pulse bg-white rounded-lg h-48"
+                />
+              ))}
+            </div>
+          }
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((props, index) => (
               <article key={index}>

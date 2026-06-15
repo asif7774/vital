@@ -1,7 +1,7 @@
-import { CachedSvgSprite } from '../types/svg-sprite';
+import { CachedSvgSprite } from "../types/svg-sprite";
 
-const CACHE_KEY_PREFIX = 'svg-sprite-cache-';
-const CACHE_VERSION_KEY = 'svg-sprite-version-';
+const CACHE_KEY_PREFIX = "svg-sprite-cache-";
+const CACHE_VERSION_KEY = "svg-sprite-version-";
 const CACHE_EXPIRY_DAYS = 30;
 
 // Track loading states to prevent duplicate requests
@@ -63,7 +63,7 @@ export const getCachedSvgSprite = (url: string): CachedSvgSprite | null => {
     return parsedData;
   } catch (error) {
     if (import.meta.env.DEV) {
-      console.warn('Failed to retrieve cached SVG sprite:', error);
+      console.warn("Failed to retrieve cached SVG sprite:", error);
     }
     return null;
   }
@@ -75,7 +75,7 @@ export const getCachedSvgSprite = (url: string): CachedSvgSprite | null => {
 export const cacheSvgSprite = (
   url: string,
   data: string,
-  version: string
+  version: string,
 ): void => {
   try {
     const cacheKey = getCacheKey(url);
@@ -84,14 +84,14 @@ export const cacheSvgSprite = (
     const cacheData: CachedSvgSprite = {
       data,
       version,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     localStorage.setItem(cacheKey, JSON.stringify(cacheData));
     localStorage.setItem(versionKey, version);
   } catch (error) {
     if (import.meta.env.DEV) {
-      console.warn('Failed to cache SVG sprite:', error);
+      console.warn("Failed to cache SVG sprite:", error);
     }
   }
 };
@@ -108,7 +108,7 @@ export const clearCachedSvgSprite = (url: string): void => {
     localStorage.removeItem(versionKey);
   } catch (error) {
     if (import.meta.env.DEV) {
-      console.warn('Failed to clear cached SVG sprite:', error);
+      console.warn("Failed to clear cached SVG sprite:", error);
     }
   }
 };
@@ -124,7 +124,7 @@ export const hasVersionChanged = (url: string, newVersion: string): boolean => {
     return cachedVersion !== newVersion;
   } catch (error) {
     if (import.meta.env.DEV) {
-      console.warn('Failed to check version:', error);
+      console.warn("Failed to check version:", error);
     }
     return true;
   }
@@ -136,18 +136,22 @@ export const hasVersionChanged = (url: string, newVersion: string): boolean => {
 export const loadSvgSprite = async (url: string): Promise<string> => {
   // Check if already loading
   if (loadingSprites.has(url)) {
-    // Wait for the existing request to complete
+    // Wait for the existing request to complete (max 5 s)
     return new Promise((resolve, reject) => {
+      let retries = 0;
+      const MAX_RETRIES = 100; // 100 × 50 ms = 5 s
       const checkLoading = () => {
         if (!loadingSprites.has(url)) {
-          // Check cache again in case it was loaded by the other request
           const cachedData = getCachedSvgSprite(url);
           if (cachedData) {
             resolve(cachedData.data);
           } else {
-            reject(new Error('Sprite loading failed'));
+            reject(new Error("Sprite loading failed"));
           }
+        } else if (retries >= MAX_RETRIES) {
+          reject(new Error(`Timed out waiting for sprite: ${url}`));
         } else {
+          retries++;
           setTimeout(checkLoading, 50);
         }
       };
@@ -161,19 +165,24 @@ export const loadSvgSprite = async (url: string): Promise<string> => {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error(`Failed to load SVG sprite: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to load SVG sprite: ${response.status} ${response.statusText}`,
+      );
     }
 
     const svgData = await response.text();
 
     // Validate that it's actually SVG content
-    if (!svgData.includes('<svg') || !svgData.includes('</svg>')) {
-      throw new Error('Invalid SVG content received');
+    if (!svgData.includes("<svg") || !svgData.includes("</svg>")) {
+      throw new Error("Invalid SVG content received");
     }
 
     return svgData;
   } catch (error) {
-    throw new Error(`Failed to load SVG sprite from ${url}: ${error instanceof Error ? error.message : 'Unknown error'}`, { cause: error });
+    throw new Error(
+      `Failed to load SVG sprite from ${url}: ${error instanceof Error ? error.message : "Unknown error"}`,
+      { cause: error },
+    );
   } finally {
     loadingSprites.delete(url);
   }
@@ -182,14 +191,17 @@ export const loadSvgSprite = async (url: string): Promise<string> => {
 /**
  * Inject SVG sprite into DOM
  */
-export const injectSvgSprite = (svgData: string, containerId: string = 'svg-sprite-container'): void => {
+export const injectSvgSprite = (
+  svgData: string,
+  containerId: string = "svg-sprite-container",
+): void => {
   let container = document.getElementById(containerId);
 
   if (!container) {
-    container = document.createElement('div');
+    container = document.createElement("div");
     container.id = containerId;
-    container.style.display = 'none';
-    container.setAttribute('aria-hidden', 'true');
+    container.style.display = "none";
+    container.setAttribute("aria-hidden", "true");
     document.body.appendChild(container);
   }
 
@@ -202,13 +214,17 @@ export const injectSvgSprite = (svgData: string, containerId: string = 'svg-spri
 /**
  * Check if SVG sprite is already injected
  */
-export const isSvgSpriteInjected = (containerId: string = 'svg-sprite-container'): boolean => {
+export const isSvgSpriteInjected = (
+  containerId: string = "svg-sprite-container",
+): boolean => {
   const container = document.getElementById(containerId);
-  if (!container) { return false; }
+  if (!container) {
+    return false;
+  }
 
   // Check if container has SVG content with symbols
-  const svgElement = container.querySelector('svg');
-  const hasSymbols = container.querySelector('symbol');
+  const svgElement = container.querySelector("svg");
+  const hasSymbols = container.querySelector("symbol");
 
   return svgElement !== null && hasSymbols !== null;
 };

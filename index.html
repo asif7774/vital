@@ -67,34 +67,5 @@
     
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Performance monitor loads only in development or with ?perf query param -->
-    <script>
-      (function() {
-        // Only load performance monitor if explicitly requested via query param
-        // or if running on localhost (development)
-        const urlParams = new URLSearchParams(window.location.search);
-        const shouldLoadPerf = urlParams.has('perf');
-        const isLocalhost = window.location.hostname === 'localhost' || 
-                          window.location.hostname === '127.0.0.1' ||
-                          window.location.hostname === '';
-        
-        if (shouldLoadPerf || isLocalhost) {
-          // Defer loading until after page is interactive to avoid blocking
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadPerfMonitor);
-          } else {
-            // Page already loaded, defer with setTimeout
-            setTimeout(loadPerfMonitor, 100);
-          }
-        }
-        
-        function loadPerfMonitor() {
-          const script = document.createElement('script');
-          script.src = '/performance-monitor.js';
-          script.defer = true;
-          document.body.appendChild(script);
-        }
-      })();
-    </script>
   </body>
 </html>

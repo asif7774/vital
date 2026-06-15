@@ -39,7 +39,6 @@ The system is already integrated into your app:
 <SvgSpriteLoader 
   url="/sprites/app-icons.svg" 
   version="1.0.0"
-  onLoad={() => console.log('✅ SVG sprite loaded successfully')}
   onError={(error) => console.error('❌ Failed to load SVG sprite:', error)}
 >
   {/* Your app content */}
@@ -64,7 +63,6 @@ import { SvgIcon } from 'components/atoms/svg-sprite-loader';
 // With styling and click handler
 <SvgIcon 
   name="settings" 
- 
   width="32" 
   height="32" 
   className="hover:text-blue-600 cursor-pointer"
@@ -222,7 +220,6 @@ After running the script, you'll see:
 ```tsx
 <SvgIcon 
   name="star" 
- 
   width="24" 
   height="24" 
   className="text-yellow-500"
@@ -233,7 +230,6 @@ After running the script, you'll see:
 ```tsx
 <SvgIcon 
   name="heart" 
- 
   width="32" 
   height="32" 
   className="text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
@@ -245,7 +241,6 @@ After running the script, you'll see:
 ```tsx
 <SvgIcon 
   name="star-filled" 
- 
   width="48" 
   height="48" 
   className="text-yellow-500"
@@ -436,8 +431,7 @@ npm run generate-sprite
 import { SvgIcon } from 'components/atoms/svg-sprite-loader';
 
 <SvgIcon 
-  name="home"           // Must match symbol id
-   // Usually 0 0 24 24
+  name="home"           // Must match symbol id in the sprite
   width="24" 
   height="24"
   className="text-blue-600"

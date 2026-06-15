@@ -1,8 +1,8 @@
 export default {
-  "*.{ts,tsx,css}": ["prettier . --write"],
+  "*.{ts,tsx,css}": ["prettier --write"],
   "*.{ts,tsx}": [
-    "eslint . --cache --fix --ext .tsx --ext .ts",
+    "eslint --cache --fix",
     () => "npm run tsc",
-    () => "npm run test",
+    "vitest related --run",
   ],
 };

@@ -1,3 +1,5 @@
+import type { MouseEvent, CSSProperties, ReactNode } from "react";
+
 export interface SvgIconProps {
   name: string;
   width?: string | number;
@@ -6,10 +8,10 @@ export interface SvgIconProps {
   stroke?: string;
   strokeWidth?: string | number;
   className?: string;
-  onClick?: (event: React.MouseEvent<SVGSVGElement>) => void;
-  style?: React.CSSProperties;
-  'aria-label'?: string;
-  'aria-hidden'?: boolean;
+  onClick?: (event: MouseEvent<SVGSVGElement>) => void;
+  style?: CSSProperties;
+  "aria-label"?: string;
+  "aria-hidden"?: boolean;
 }
 
 export interface SvgSpriteLoaderProps {
@@ -17,11 +19,11 @@ export interface SvgSpriteLoaderProps {
   version?: string;
   onLoad?: () => void;
   onError?: (error: Error) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 export interface SvgSpriteState {
-  status: 'loading' | 'loaded' | 'error';
+  status: "loading" | "loaded" | "error";
   error?: Error;
 }
 
