@@ -40,16 +40,16 @@ const Footer: React.FC = () => {
               <span className="ml-2 text-xl font-bold">Vital</span>
             </div>
             <p className="text-gray-300 text-sm">
-              A modern React boilerplate template with React 19, TypeScript, Tailwind CSS 4, 
+              A modern React boilerplate template with React 19, TypeScript, Tailwind CSS 4,
               and all the tools you need to build amazing applications.
             </p>
             <div className="space-y-2">
               <div className="flex items-center text-sm text-gray-300">
-                <SvgIcon name="mail" viewBox="0 0 24 24" width="16" height="16" className="mr-2" />
+                <SvgIcon name="mail" width="16" height="16" className="mr-2" />
                 <a href="mailto:asif.ansari7774@gmail.com" className="hover:text-white">asif.ansari7774@gmail.com</a>
               </div>
               <div className="flex items-center text-sm text-gray-300">
-                <SvgIcon name="external-link" viewBox="0 0 24 24" width="16" height="16" className="mr-2" />
+                <SvgIcon name="external-link" width="16" height="16" className="mr-2" />
                 <a href="https://github.com/asif7774/vital" target="_blank" rel="noopener noreferrer" className="hover:text-white">GitHub Repository</a>
               </div>
             </div>

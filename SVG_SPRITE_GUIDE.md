@@ -56,7 +56,6 @@ import { SvgIcon } from 'components/atoms/svg-sprite-loader';
 // Basic usage
 <SvgIcon 
   name="home" 
-  viewBox="0 0 24 24" 
   width="24" 
   height="24" 
   fill="currentColor"
@@ -65,7 +64,7 @@ import { SvgIcon } from 'components/atoms/svg-sprite-loader';
 // With styling and click handler
 <SvgIcon 
   name="settings" 
-  viewBox="0 0 24 24" 
+ 
   width="32" 
   height="32" 
   className="hover:text-blue-600 cursor-pointer"
@@ -120,7 +119,7 @@ If you prefer to add icons manually or need fine-grained control:
 
 1. **Create your SVG icon** with a 24x24 viewBox (recommended):
    ```svg
-   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+   <svg fill="none" stroke="currentColor" stroke-width="2">
      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
    </svg>
    ```
@@ -129,7 +128,7 @@ If you prefer to add icons manually or need fine-grained control:
 
 3. **Add a new `<symbol>` element** inside the root `<svg>` tag:
    ```svg
-   <symbol id="my-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+   <symbol id="my-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
    </symbol>
    ```
@@ -137,7 +136,6 @@ If you prefer to add icons manually or need fine-grained control:
 4. **Important points**:
    - The `id` attribute is what you'll use in the `SvgIcon` component's `name` prop
    - Use `currentColor` for `fill` or `stroke` to allow CSS color inheritance
-   - Keep the viewBox consistent (typically `0 0 24 24`)
    - Add the symbol before the closing `</svg>` tag
 
 5. **Update the version** in `app.tsx` to invalidate cache
@@ -197,8 +195,6 @@ The generator script automatically converts individual SVG files into a sprite. 
   - `user-profile.svg` → `user-profile`
   - `icon@2x.svg` → `icon-2x`
 
-- **ViewBox Extraction**: Automatically extracts viewBox from each SVG, defaults to `0 0 24 24` if not found
-
 - **Content Cleaning**: Removes unnecessary whitespace and normalizes the SVG content
 
 - **Output**: Creates a properly formatted sprite file ready to use
@@ -226,7 +222,7 @@ After running the script, you'll see:
 ```tsx
 <SvgIcon 
   name="star" 
-  viewBox="0 0 24 24" 
+ 
   width="24" 
   height="24" 
   className="text-yellow-500"
@@ -237,7 +233,7 @@ After running the script, you'll see:
 ```tsx
 <SvgIcon 
   name="heart" 
-  viewBox="0 0 24 24" 
+ 
   width="32" 
   height="32" 
   className="text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
@@ -249,7 +245,7 @@ After running the script, you'll see:
 ```tsx
 <SvgIcon 
   name="star-filled" 
-  viewBox="0 0 24 24" 
+ 
   width="48" 
   height="48" 
   className="text-yellow-500"
@@ -263,13 +259,13 @@ After running the script, you'll see:
 ### Different Sizes
 ```tsx
 // Small (16px)
-<SvgIcon name="check" viewBox="0 0 24 24" width="16" height="16" />
+<SvgIcon name="check" width="16" height="16" />
 
 // Medium (24px)
-<SvgIcon name="check" viewBox="0 0 24 24" width="24" height="24" />
+<SvgIcon name="check" width="24" height="24" />
 
 // Large (48px)
-<SvgIcon name="check" viewBox="0 0 24 24" width="48" height="48" />
+<SvgIcon name="check" width="48" height="48" />
 ```
 
 ## 🔧 Advanced Usage
@@ -441,7 +437,7 @@ import { SvgIcon } from 'components/atoms/svg-sprite-loader';
 
 <SvgIcon 
   name="home"           // Must match symbol id
-  viewBox="0 0 24 24"   // Usually 0 0 24 24
+   // Usually 0 0 24 24
   width="24" 
   height="24"
   className="text-blue-600"
@@ -453,7 +449,6 @@ import { SvgIcon } from 'components/atoms/svg-sprite-loader';
 - **Sprite Location**: `public/sprites/app-icons.svg` (served at `/sprites/app-icons.svg`)
 - **Version Management**: Always increment the `version` prop in `SvgSpriteLoader` when updating icons to invalidate browser cache
 - **Icon Naming**: Use kebab-case for icon IDs (e.g., `my-icon`, not `myIcon`)
-- **ViewBox**: Standard is `0 0 24 24` for consistency
 - **Color**: Use `currentColor` in SVG to allow CSS color inheritance
 - **Generator Script**: Not automatically run - use manually when needed
 

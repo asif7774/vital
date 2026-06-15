@@ -22,6 +22,7 @@ export default defineConfig(() => {
         layouts: resolve(__dirname, "src", "layouts"),
         pages: resolve(__dirname, "src", "pages"),
         utils: resolve(__dirname, "src", "utils"),
+        types: resolve(__dirname, "src", "types"),
       },
     },
     build: {

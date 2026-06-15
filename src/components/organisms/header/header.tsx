@@ -34,7 +34,7 @@ const Header: React.FC = () => {
             >
               <SvgIcon
                 name="logo"
-                viewBox="0 0 24 24"
+
                 width="32"
                 height="32"
                 className="text-blue-600"
@@ -51,12 +51,12 @@ const Header: React.FC = () => {
                 key={item.name}
                 to={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center ${isActive(item.href)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  ? 'text-blue-600 bg-blue-50'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                   }`}
                 aria-current={isActive(item.href) ? 'page' : undefined}
               >
-                <SvgIcon name={item.icon} viewBox="0 0 24 24" width="16" height="16" className="mr-2" />
+                <SvgIcon name={item.icon} width="16" height="16" className="mr-2" />
                 {item.name}
               </Link>
             ))}
@@ -68,7 +68,7 @@ const Header: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
                   <div className="h-8 w-8 bg-gray-300 rounded-full flex items-center justify-center">
-                    <SvgIcon name="user" viewBox="0 0 24 24" width="20" height="20" className="text-gray-600" />
+                    <SvgIcon name="user" width="20" height="20" className="text-gray-600" />
                   </div>
                   <span className="text-sm font-medium text-gray-700">
                     {user?.name}
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
                   title="Logout"
                   aria-label="Logout from Vital"
                 >
-                  <SvgIcon name="logout" viewBox="0 0 24 24" width="20" height="20" aria-hidden={true} />
+                  <SvgIcon name="logout" width="20" height="20" aria-hidden={true} />
                 </button>
               </div>
             ) : (
@@ -103,9 +103,9 @@ const Header: React.FC = () => {
               aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
-                <SvgIcon name="close" viewBox="0 0 24 24" width="24" height="24" aria-hidden={true} />
+                <SvgIcon name="close" width="24" height="24" aria-hidden={true} />
               ) : (
-                <SvgIcon name="menu" viewBox="0 0 24 24" width="24" height="24" aria-hidden={true} />
+                <SvgIcon name="menu" width="24" height="24" aria-hidden={true} />
               )}
             </button>
           </div>
@@ -120,13 +120,13 @@ const Header: React.FC = () => {
                   key={item.name}
                   to={item.href}
                   className={`px-3 py-2 rounded-md text-base font-medium flex items-center ${isActive(item.href)
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    ? 'text-blue-600 bg-blue-50'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                     }`}
                   onClick={() => { setIsMobileMenuOpen(false); }}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                 >
-                  <SvgIcon name={item.icon} viewBox="0 0 24 24" width="20" height="20" className="mr-3" />
+                  <SvgIcon name={item.icon} width="20" height="20" className="mr-3" />
                   {item.name}
                 </Link>
               ))}
@@ -134,7 +134,7 @@ const Header: React.FC = () => {
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex items-center px-3 py-2">
                     <div className="h-8 w-8 bg-gray-300 rounded-full flex items-center justify-center">
-                      <SvgIcon name="user" viewBox="0 0 24 24" width="20" height="20" className="text-gray-600" />
+                      <SvgIcon name="user" width="20" height="20" className="text-gray-600" />
                     </div>
                     <span className="ml-3 text-sm font-medium text-gray-700">
                       {user?.name}

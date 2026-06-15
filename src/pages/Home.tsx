@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useMemo } from "react";
+import { useState, lazy, Suspense } from "react";
 import Logos from "components/atoms/logos";
 import { SvgIcon } from "components/atoms/svg-sprite-loader";
 
@@ -100,9 +100,6 @@ function Home() {
     }
   };
 
-  // Memoize features to avoid recreation on re-renders
-  const memoizedFeatures = useMemo(() => features, []);
-
   return (
     <main className="min-h-screen bg-linear-to-b from-purple-600 via-purple-500 to-blue-600">
       <header className="pt-16 z-10 relative container-responsive text-center">
@@ -123,7 +120,6 @@ function Home() {
             >
               <SvgIcon
                 name={tech.icon}
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 fill="none"
@@ -139,12 +135,11 @@ function Home() {
 
         {/* Call-to-Action Buttons */}
         <div className="flex flex-col gap-4 justify-center items-center mb-16">
-          <a href="https://github.com/asif7774/vital">
+          <a href="https://github.com/asif7774/vital" target="_blank" rel="noopener noreferrer">
             <Suspense fallback={<ComponentLoader />}>
               <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
                 <SvgIcon
                   name="external-link"
-                  viewBox="0 0 24 24"
                   width="20"
                   height="20"
                   fill="none"
@@ -177,7 +172,6 @@ function Home() {
                   <>
                     <SvgIcon
                       name="check"
-                      viewBox="0 0 24 24"
                       width="16"
                       height="16"
                       fill="none"
@@ -192,7 +186,6 @@ function Home() {
                   <>
                     <SvgIcon
                       name="clipboard"
-                      viewBox="0 0 24 24"
                       width="16"
                       height="16"
                       fill="none"
@@ -213,7 +206,6 @@ function Home() {
             <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-2 z-50 animate-slide-up">
               <SvgIcon
                 name="check-circle"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 fill="none"
@@ -239,7 +231,7 @@ function Home() {
           </div>
         }>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {memoizedFeatures.map((props, index) => (
+            {features.map((props, index) => (
               <article key={index}>
                 <Card
                   title={props.name}

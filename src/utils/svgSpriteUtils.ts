@@ -173,7 +173,7 @@ export const loadSvgSprite = async (url: string): Promise<string> => {
 
     return svgData;
   } catch (error) {
-    throw new Error(`Failed to load SVG sprite from ${url}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(`Failed to load SVG sprite from ${url}: ${error instanceof Error ? error.message : 'Unknown error'}`, { cause: error });
   } finally {
     loadingSprites.delete(url);
   }

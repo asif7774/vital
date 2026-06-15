@@ -4,7 +4,6 @@ import { useSvgSprite } from './svg-sprite-loader';
 
 const SvgIcon: React.FC<SvgIconProps> = ({
   name,
-  viewBox,
   width = '24',
   height = '24',
   fill = 'currentColor',
@@ -76,7 +75,6 @@ const SvgIcon: React.FC<SvgIconProps> = ({
   const svgProps: React.SVGProps<SVGSVGElement> = {
     width: typeof width === 'number' ? `${width}px` : width,
     height: typeof height === 'number' ? `${height}px` : height,
-    viewBox,
     fill,
     className,
     onClick,
@@ -97,7 +95,7 @@ const SvgIcon: React.FC<SvgIconProps> = ({
 
   return (
     <svg {...svgProps}>
-      <use xlinkHref={`#${name}`} />
+      <use href={`#${name}`} />
     </svg>
   );
 };

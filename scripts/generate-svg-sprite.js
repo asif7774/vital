@@ -16,8 +16,8 @@
  *   npm run generate-sprite
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Default values
 const DEFAULT_INPUT_DIR = 'icons';
@@ -65,44 +65,62 @@ svgFiles.forEach((filePath, index) => {
   try {
     const fileName = path.basename(filePath, '.svg');
     const fileContent = fs.readFileSync(filePath, 'utf8');
-    
+
     // Extract viewBox from the SVG content
     const viewBoxMatch = fileContent.match(/viewBox="([^"]+)"/);
     const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
-    
+
+    // Extract fill from the SVG tag if it exists
+    const fillMatch = fileContent.match(/<svg[^>]*\sfill="([^"]+)"/);
+    const fillAttr = fillMatch ? ` fill="${fillMatch[1]}"` : '';
+
+    const strokeMatch = fileContent.match(/<svg[^>]*\sstroke="([^"]+)"/);
+    const strokeAttr = strokeMatch ? ` stroke="${strokeMatch[1]}"` : '';
+
+    const strokeWidthMatch = fileContent.match(/<svg[^>]*\sstroke-width="([^"]+)"/);
+    const strokeWidthAttr = strokeWidthMatch ? ` stroke-width="${strokeWidthMatch[1]}"` : '';
+
+    const strokeLinecapMatch = fileContent.match(/<svg[^>]*\sstroke-linecap="([^"]+)"/);
+    const strokeLinecapAttr = strokeLinecapMatch ? ` stroke-linecap="${strokeLinecapMatch[1]}"` : '';
+
+    const strokeLinejoinMatch = fileContent.match(/<svg[^>]*\sstroke-linejoin="([^"]+)"/);
+    const strokeLinejoinAttr = strokeLinejoinMatch ? ` stroke-linejoin="${strokeLinejoinMatch[1]}"` : '';
+
     // Extract the content inside the <svg> tags
     const contentMatch = fileContent.match(/<svg[^>]*>(.*?)<\/svg>/s);
     if (!contentMatch) {
       console.warn(`⚠️  Could not parse SVG content from ${filePath}`);
       return;
     }
-    
+
     const svgContent = contentMatch[1];
-    
+
     // Clean up the content
     const cleanedContent = svgContent
       .replace(/\s+/g, ' ') // Normalize whitespace
       .replace(/>\s+</g, '><') // Remove whitespace between tags
+      .replace(/stroke="[^"]+"/gi, 'stroke="currentColor"') // Force stroke inheritance
+      .replace(/\s?stroke-opacity="[^"]+"/gi, '') // Remove hardcoded opacity
       .trim();
-    
+
     // Create symbol element
     const symbolId = fileName
       .toLowerCase()
       .replace(/[^a-z0-9-]/g, '-') // Replace non-alphanumeric chars with hyphens
       .replace(/-+/g, '-') // Replace multiple hyphens with single
       .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
-    
-    const symbol = `  <symbol id="${symbolId}" viewBox="${viewBox}">
+
+    const symbol = `  <symbol id="${symbolId}" viewBox="${viewBox}"${fillAttr}${strokeAttr}${strokeWidthAttr}${strokeLinecapAttr}${strokeLinejoinAttr}>
     ${cleanedContent}
   </symbol>
 
 `;
-    
+
     spriteContent += symbol;
     processedCount++;
-    
+
     console.log(`✅ Processed: ${fileName} → ${symbolId}`);
-    
+
   } catch (error) {
     console.error(`❌ Error processing ${filePath}:`, error.message);
   }
@@ -123,16 +141,16 @@ try {
   console.log(`\n🎉 Successfully generated SVG sprite!`);
   console.log(`📄 Output file: ${outputFile}`);
   console.log(`📊 Processed: ${processedCount}/${svgFiles.length} icons`);
-  
+
   // Show file size
   const stats = fs.statSync(outputFile);
   const fileSizeKB = (stats.size / 1024).toFixed(2);
   console.log(`📏 File size: ${fileSizeKB} KB`);
-  
+
   // Show usage example
   console.log(`\n💡 Usage example:`);
-  console.log(`   <SvgIcon name="icon-name" viewBox="0 0 24 24" width="24" height="24" />`);
-  
+  console.log(`   <SvgIcon name="icon-name" width="24" height="24" />`);
+
 } catch (error) {
   console.error(`❌ Error writing sprite file:`, error.message);
   process.exit(1);

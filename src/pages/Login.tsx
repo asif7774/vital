@@ -107,9 +107,9 @@ const Login: React.FC = () => {
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? (
-                  <SvgIcon name="eye-slash" viewBox="0 0 24 24" width="20" height="20" className="text-gray-400" aria-hidden={true} />
+                  <SvgIcon name="eye-slash" width="20" height="20" className="text-gray-400" aria-hidden={true} />
                 ) : (
-                  <SvgIcon name="eye" viewBox="0 0 24 24" width="20" height="20" className="text-gray-400" aria-hidden={true} />
+                  <SvgIcon name="eye" width="20" height="20" className="text-gray-400" aria-hidden={true} />
                 )}
               </button>
             </div>

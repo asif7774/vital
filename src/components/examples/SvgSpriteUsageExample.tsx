@@ -34,7 +34,6 @@ const SvgSpriteUsageExample: React.FC = () => {
             <div key={iconName} className="flex flex-col items-center space-y-2">
               <SvgIcon
                 name={iconName}
-                viewBox="0 0 24 24"
                 width="32"
                 height="32"
                 fill="currentColor"
@@ -54,7 +53,6 @@ const SvgSpriteUsageExample: React.FC = () => {
             <div key={size} className="flex flex-col items-center space-y-2">
               <SvgIcon
                 name="star"
-                viewBox="0 0 24 24"
                 width={size}
                 height={size}
                 fill="currentColor"
@@ -81,7 +79,6 @@ const SvgSpriteUsageExample: React.FC = () => {
             <div key={name} className="flex flex-col items-center space-y-2">
               <SvgIcon
                 name="heart"
-                viewBox="0 0 24 24"
                 width="32"
                 height="32"
                 fill="currentColor"
@@ -108,7 +105,6 @@ const SvgSpriteUsageExample: React.FC = () => {
             <div key={name} className="flex flex-col items-center space-y-2">
               <SvgIcon
                 name={name}
-                viewBox="0 0 24 24"
                 width="32"
                 height="32"
                 fill="currentColor"
@@ -136,7 +132,6 @@ const SvgSpriteUsageExample: React.FC = () => {
             <div key={name} className="flex flex-col items-center space-y-2">
               <SvgIcon
                 name={name}
-                viewBox="0 0 24 24"
                 width="32"
                 height="32"
                 fill="currentColor"
@@ -163,7 +158,6 @@ const SvgSpriteUsageExample: React.FC = () => {
             <div key={name} className="flex flex-col items-center space-y-2">
               <SvgIcon
                 name={name}
-                viewBox="0 0 24 24"
                 width="32"
                 height="32"
                 fill="currentColor"
@@ -184,7 +178,6 @@ const SvgSpriteUsageExample: React.FC = () => {
           <div className="flex flex-col items-center space-y-2 p-4 bg-gray-50 rounded-lg">
             <SvgIcon
               name="star-filled"
-              viewBox="0 0 24 24"
               width="48"
               height="48"
               fill="currentColor"
@@ -201,7 +194,6 @@ const SvgSpriteUsageExample: React.FC = () => {
           <div className="flex flex-col items-center space-y-2 p-4 bg-linear-to-r from-blue-500 to-purple-600 rounded-lg">
             <SvgIcon
               name="heart-filled"
-              viewBox="0 0 24 24"
               width="48"
               height="48"
               fill="currentColor"
@@ -214,7 +206,6 @@ const SvgSpriteUsageExample: React.FC = () => {
           <div className="flex flex-col items-center space-y-2 p-4 bg-gray-50 rounded-lg">
             <SvgIcon
               name="refresh"
-              viewBox="0 0 24 24"
               width="48"
               height="48"
               fill="currentColor"
@@ -236,7 +227,6 @@ const SvgSpriteUsageExample: React.FC = () => {
             {`// Basic usage
 <SvgIcon 
   name="home" 
-  viewBox="0 0 24 24" 
   width="24" 
   height="24" 
   fill="currentColor"
@@ -245,7 +235,6 @@ const SvgSpriteUsageExample: React.FC = () => {
 // With click handler
 <SvgIcon 
   name="settings" 
-  viewBox="0 0 24 24" 
   width="32" 
   height="32" 
   className="hover:text-blue-600 cursor-pointer"
@@ -255,7 +244,6 @@ const SvgSpriteUsageExample: React.FC = () => {
 // Custom styling
 <SvgIcon 
   name="star-filled" 
-  viewBox="0 0 24 24" 
   width="48" 
   height="48" 
   className="text-yellow-500"

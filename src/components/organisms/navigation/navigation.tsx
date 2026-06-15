@@ -68,7 +68,7 @@ const Navigation: React.FC<NavigationProps> = ({ isSidebar = false }) => {
             to={item.href}
             className={linkClasses(active)}
           >
-            <SvgIcon name={item.icon} viewBox="0 0 24 24" width="20" height="20" className={iconClasses} />
+            <SvgIcon name={item.icon} width="20" height="20" className={iconClasses} />
             {item.name}
           </Link>
         );

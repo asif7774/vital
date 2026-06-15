@@ -17,6 +17,8 @@ export default defineConfig({
       contexts: resolve(__dirname, "src", "contexts"),
       layouts: resolve(__dirname, "src", "layouts"),
       pages: resolve(__dirname, "src", "pages"),
+      utils: resolve(__dirname, "src", "utils"),
+      types: resolve(__dirname, "src", "types"),
     },
   },
 })

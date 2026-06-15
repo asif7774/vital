@@ -16,7 +16,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="home"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -29,7 +28,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="user"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -42,7 +40,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="settings"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -55,7 +52,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="search"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -68,7 +64,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="menu"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -81,7 +76,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="close"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -95,7 +89,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="arrow-right"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -108,7 +101,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="arrow-left"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -121,7 +113,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="check"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -134,7 +125,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="plus"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -147,7 +137,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="minus"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -160,7 +149,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="star"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -174,7 +162,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="heart"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -187,7 +174,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="mail"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -200,7 +186,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="phone"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -213,7 +198,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="location"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -226,7 +210,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="calendar"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -239,7 +222,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex flex-col items-center space-y-2">
           <SvgIcon
             name="clock"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -256,7 +238,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex items-center space-x-4">
           <SvgIcon
             name="home"
-            viewBox="0 0 24 24"
             width="16"
             height="16"
             fill="currentColor"
@@ -264,7 +245,6 @@ const SvgIconDemo: React.FC = () => {
           />
           <SvgIcon
             name="home"
-            viewBox="0 0 24 24"
             width="24"
             height="24"
             fill="currentColor"
@@ -272,7 +252,6 @@ const SvgIconDemo: React.FC = () => {
           />
           <SvgIcon
             name="home"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -280,7 +259,6 @@ const SvgIconDemo: React.FC = () => {
           />
           <SvgIcon
             name="home"
-            viewBox="0 0 24 24"
             width="48"
             height="48"
             fill="currentColor"
@@ -288,7 +266,6 @@ const SvgIconDemo: React.FC = () => {
           />
           <SvgIcon
             name="home"
-            viewBox="0 0 24 24"
             width="64"
             height="64"
             fill="currentColor"
@@ -303,7 +280,6 @@ const SvgIconDemo: React.FC = () => {
         <div className="flex items-center space-x-4">
           <SvgIcon
             name="star"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -312,7 +288,6 @@ const SvgIconDemo: React.FC = () => {
           />
           <SvgIcon
             name="heart"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"
@@ -321,7 +296,6 @@ const SvgIconDemo: React.FC = () => {
           />
           <SvgIcon
             name="settings"
-            viewBox="0 0 24 24"
             width="32"
             height="32"
             fill="currentColor"

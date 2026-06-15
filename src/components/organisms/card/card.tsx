@@ -23,16 +23,15 @@ const Card = memo(forwardRef<HTMLDivElement, CardProps>(
         {...rest}
       >
         <div className="absolute right-4 top-4">
-          <SvgIcon 
-            name={icon} 
-            viewBox="0 0 24 24" 
-            width="32" 
-            height="32" 
+          <SvgIcon
+            name={icon}
+            width="32"
+            height="32"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            className="text-gray-400" 
-            aria-hidden={true} 
+            className="text-gray-400"
+            aria-hidden={true}
           />
         </div>
         <div className="flex flex-col h-full pr-12">

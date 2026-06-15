@@ -1,6 +1,5 @@
 export interface SvgIconProps {
   name: string;
-  viewBox: string;
   width?: string | number;
   height?: string | number;
   fill?: string;

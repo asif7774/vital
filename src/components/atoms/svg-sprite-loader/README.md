@@ -50,7 +50,6 @@ function MyComponent() {
       {/* Basic usage */}
       <SvgIcon 
         name="home" 
-        viewBox="0 0 24 24" 
         width="24" 
         height="24" 
         fill="currentColor"
@@ -59,7 +58,6 @@ function MyComponent() {
       {/* With click handler */}
       <SvgIcon 
         name="settings" 
-        viewBox="0 0 24 24" 
         width="32" 
         height="32" 
         fill="currentColor"
@@ -70,7 +68,6 @@ function MyComponent() {
       {/* With custom styling */}
       <SvgIcon 
         name="star" 
-        viewBox="0 0 24 24" 
         width="48" 
         height="48" 
         fill="currentColor"
@@ -99,7 +96,6 @@ function MyComponent() {
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `name` | `string` | ✅ | - | Icon name (must match symbol id in sprite) |
-| `viewBox` | `string` | ✅ | - | SVG viewBox attribute |
 | `width` | `string \| number` | ❌ | `"24"` | Icon width |
 | `height` | `string \| number` | ❌ | `"24"` | Icon height |
 | `fill` | `string` | ❌ | `"currentColor"` | Fill color |
@@ -157,10 +153,9 @@ Your SVG sprite file should follow this format:
 
 ## Performance Tips
 
-1. **Use appropriate viewBox**: Match the viewBox to your icon's actual dimensions
-2. **Optimize SVG files**: Remove unnecessary attributes and compress your sprites
-3. **Version control**: Update the version prop when you update your sprite file
-4. **Preload critical icons**: Consider preloading icons that appear above the fold
+1. **Optimize SVG files**: Remove unnecessary attributes and compress your sprites
+2. **Version control**: Update the version prop when you update your sprite file
+3. **Preload critical icons**: Consider preloading icons that appear above the fold
 
 ## Browser Support
 
