@@ -49,6 +49,9 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@oddbird/css-anchor-positioning": "^0.9.0",
+    "@oddbird/popover-polyfill": "^0.6.1",
+    "interestfor": "^1.0.8",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.17.0"

@@ -4,6 +4,12 @@ import { AuthProvider } from 'contexts/AuthContext';
 import { SvgSpriteLoader } from 'components/atoms/svg-sprite-loader';
 import { ErrorBoundary, AppErrorFallback, PageErrorFallback } from 'components/atoms/error-boundary';
 
+import { ToastProvider } from 'contexts/ToastContext';
+import { ToastContainer } from 'components/organisms/toast/toast-container';
+
+import { ModalProvider } from 'contexts/ModalContext';
+import { ModalContainer } from 'components/organisms/modal/modal-container';
+
 // Lazy load layouts for better code splitting
 const NormalLayout = React.lazy(() => import('layouts/NormalLayout'));
 // AuthLayout is lazy loaded and ready to use when needed for protected routes
@@ -11,7 +17,8 @@ const NormalLayout = React.lazy(() => import('layouts/NormalLayout'));
 
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('pages/Home'));
-const Login = React.lazy(() => import('pages/Login'));
+const Icons = React.lazy(() => import('pages/Icons'));
+const Components = React.lazy(() => import('pages/Components'));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -46,17 +53,21 @@ function App() {
     // Level 1: App-level error boundary — last resort for catastrophic failures
     <ErrorBoundary fallbackRender={AppErrorFallback}>
       <AuthProvider>
-        {/* SvgSpriteLoader wraps Router to provide context, but loading is deferred internally */}
-        <SvgSpriteLoader
-          url="/sprites/app-icons.svg"
-          version="1.0.0"
-          // eslint-disable-next-line no-console
-          onLoad={import.meta.env.DEV ? () => { console.log('✅ SVG sprite loaded successfully'); } : undefined}
-          onError={import.meta.env.DEV ? (error) => { console.error('❌ Failed to load SVG sprite:', error); } : undefined}
-        >
-          <Router>
-            <Suspense fallback={<LoadingSpinner />}>
-              <Routes>
+        <ToastProvider>
+          <ModalProvider>
+            {/* SvgSpriteLoader wraps Router to provide context, but loading is deferred internally */}
+            <SvgSpriteLoader
+              url="/sprites/app-icons.svg"
+              version="1.0.0"
+              // eslint-disable-next-line no-console
+              onLoad={import.meta.env.DEV ? () => { console.log('✅ SVG sprite loaded successfully'); } : undefined}
+              onError={import.meta.env.DEV ? (error) => { console.error('❌ Failed to load SVG sprite:', error); } : undefined}
+            >
+              <ToastContainer />
+              <ModalContainer />
+            <Router>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
                 {/* Public Routes — each wrapped with page-level error boundary */}
                 <Route
                   path="/"
@@ -65,13 +76,15 @@ function App() {
                   }
                 />
                 <Route
-                  path="/login"
+                  path="/icons"
                   element={
-                    <ErrorBoundary fallbackRender={PageErrorFallback}>
-                      <Suspense fallback={<LoadingSpinner />}>
-                        <Login />
-                      </Suspense>
-                    </ErrorBoundary>
+                    <LazyLayoutWrapper Layout={NormalLayout} Page={Icons} />
+                  }
+                />
+                <Route
+                  path="/components"
+                  element={
+                    <LazyLayoutWrapper Layout={NormalLayout} Page={Components} />
                   }
                 />
 
@@ -81,6 +94,8 @@ function App() {
             </Suspense>
           </Router>
         </SvgSpriteLoader>
+          </ModalProvider>
+        </ToastProvider>
       </AuthProvider>
     </ErrorBoundary>
   );

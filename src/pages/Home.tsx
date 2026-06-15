@@ -118,7 +118,7 @@ function Home() {
           {techBadges.map((tech, index) => (
             <div
               key={index}
-              className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20"
+              className="flex items-center text-white gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20"
             >
               <SvgIcon
                 name={tech.icon}
@@ -126,8 +126,6 @@ function Home() {
                 height="20"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
-                className="text-white"
                 aria-hidden={true}
               />
               <span className="text-white font-semibold text-sm">
@@ -145,18 +143,8 @@ function Home() {
             rel="noopener noreferrer"
           >
             <Suspense fallback={<ComponentLoader />}>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
-                <SvgIcon
-                  name="external-link"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="text-white"
-                  aria-hidden={true}
-                />
-                Visit on Github
+              <Button size="lg" icon="external-link" className="shadow-lg hover:shadow-xl">
+                View on GitHub
               </Button>
             </Suspense>
           </a>
@@ -195,7 +183,7 @@ function Home() {
                 ) : (
                   <>
                     <SvgIcon
-                      name="clipboard"
+                      name="copy"
                       width="16"
                       height="16"
                       fill="none"

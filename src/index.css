@@ -205,4 +205,13 @@
       transition-duration: 0.01ms !important;
     }
   }
+  
+  /* Tooltip Polyfill Adjustments */
+  [popover] {
+    inset: auto;
+  }
+  
+  .tooltip-popover {
+    inset: auto !important; /* Tailwind's dialog reset overrides this */
+  }
 }

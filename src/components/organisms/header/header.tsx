@@ -12,7 +12,8 @@ const Header: React.FC = () => {
     { name: 'Dashboard', href: '/dashboard', requiresAuth: true, icon: 'home' },
     { name: 'About Us', href: '/about', requiresAuth: false, icon: 'info' },
     { name: 'Contact Us', href: '/contact', requiresAuth: false, icon: 'mail' },
-    { name: 'SVG Demo', href: '/svg-demo', requiresAuth: false, icon: 'wrench' },
+    { name: 'Icons', href: '/icons', requiresAuth: false, icon: 'wrench' },
+    { name: 'Components', href: '/components', requiresAuth: false, icon: 'collection' },
   ];
 
   const filteredNavigation = navigation.filter(item =>
@@ -83,14 +84,7 @@ const Header: React.FC = () => {
                   <SvgIcon name="logout" width="20" height="20" aria-hidden={true} />
                 </button>
               </div>
-            ) : (
-              <Link
-                to="/login"
-                className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Login
-              </Link>
-            )}
+            ) : null}
           </div>
 
           {/* Mobile menu button */}
@@ -130,7 +124,7 @@ const Header: React.FC = () => {
                   {item.name}
                 </Link>
               ))}
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex items-center px-3 py-2">
                     <div className="h-8 w-8 bg-gray-300 rounded-full flex items-center justify-center">
@@ -150,16 +144,6 @@ const Header: React.FC = () => {
                   >
                     Logout
                   </button>
-                </div>
-              ) : (
-                <div className="pt-4 border-t border-gray-200">
-                  <Link
-                    to="/login"
-                    className="block px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-md"
-                    onClick={() => { setIsMobileMenuOpen(false); }}
-                  >
-                    Login
-                  </Link>
                 </div>
               )}
             </nav>

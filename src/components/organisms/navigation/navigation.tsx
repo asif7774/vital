@@ -21,7 +21,7 @@ const Navigation: React.FC<NavigationProps> = ({ isSidebar = false }) => {
   const authNavigation = [
     { name: 'Dashboard', href: '/dashboard', icon: 'chart-bar' },
     { name: 'Projects', href: '/projects', icon: 'folder' },
-    { name: 'Tasks', href: '/tasks', icon: 'clipboard' },
+    { name: 'Tasks', href: '/tasks', icon: 'clipboard-list' },
     { name: 'Notifications', href: '/notifications', icon: 'bell' },
     { name: 'Settings', href: '/settings', icon: 'settings' },
   ];
