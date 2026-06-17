@@ -24,6 +24,8 @@ This document outlines the standard operating procedures and coding standards fo
 - **Premium Feel:** Ensure all UI components feel modern, responsive, and polished. Pay attention to accessibility (`aria` attributes), focus states, and smooth interactions.
 - **Tailwind First:** Use Tailwind CSS utility classes as much as possible for styling. Strictly avoid inline styles (`style={{...}}`) unless absolutely necessary for highly dynamic calculated values (e.g., positional coordinates).
 - **Component Reuse:** Always prioritize using existing global components from the `src/components/` directory (such as `<Button>`, `<Tooltip>`, `<Modal>`, etc.) instead of writing raw HTML equivalents or duplicating component logic.
+- **Context Providers:** Context providers should be placed at the root of feature modules (e.g., `src/features/auth/context.tsx`) or the application entry point, not at the top level of shared libraries, to prevent conflicts with other context consumers.
+
 ## 5. Tool Usage
 - Use the most specific and safe tools available for file reading and writing. 
 - Do not overwrite entire files unless you are certain; prefer surgical, targeted edits where possible.
