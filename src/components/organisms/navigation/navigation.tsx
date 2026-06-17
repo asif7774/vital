@@ -1,8 +1,9 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from 'contexts/AuthContext';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "hooks/useAuth";
+
 // Removed Heroicons - using SVG sprite instead
-import { SvgIcon } from 'components/atoms/svg-sprite-loader';
+import { SvgIcon } from "components/atoms/svg-sprite-loader";
 
 interface NavigationProps {
   isSidebar?: boolean;
@@ -13,26 +14,24 @@ const Navigation: React.FC<NavigationProps> = ({ isSidebar = false }) => {
   const location = useLocation();
 
   const publicNavigation = [
-    { name: 'Home', href: '/', icon: 'home' },
-    { name: 'About Us', href: '/about', icon: 'users' },
-    { name: 'Contact Us', href: '/contact', icon: 'phone' },
+    { name: "Home", href: "/", icon: "home" },
+    { name: "About Us", href: "/about", icon: "users" },
+    { name: "Contact Us", href: "/contact", icon: "phone" },
   ];
 
   const authNavigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: 'chart-bar' },
-    { name: 'Projects', href: '/projects', icon: 'folder' },
-    { name: 'Tasks', href: '/tasks', icon: 'clipboard-list' },
-    { name: 'Notifications', href: '/notifications', icon: 'bell' },
-    { name: 'Settings', href: '/settings', icon: 'settings' },
+    { name: "Dashboard", href: "/dashboard", icon: "chart-bar" },
+    { name: "Projects", href: "/projects", icon: "folder" },
+    { name: "Tasks", href: "/tasks", icon: "clipboard-list" },
+    { name: "Notifications", href: "/notifications", icon: "bell" },
+    { name: "Settings", href: "/settings", icon: "settings" },
   ];
 
   const navigation = isAuthenticated ? authNavigation : publicNavigation;
 
   const isActive = (path: string) => location.pathname === path;
 
-  const baseClasses = isSidebar
-    ? "space-y-1"
-    : "flex space-x-8";
+  const baseClasses = isSidebar ? "space-y-1" : "flex space-x-8";
 
   const linkClasses = (active: boolean) => {
     const base = isSidebar
@@ -53,9 +52,7 @@ const Navigation: React.FC<NavigationProps> = ({ isSidebar = false }) => {
     return `${base} ${activeStyles}`;
   };
 
-  const iconClasses = isSidebar
-    ? "mr-3 h-5 w-5 flex-shrink-0"
-    : "hidden";
+  const iconClasses = isSidebar ? "mr-3 h-5 w-5 flex-shrink-0" : "hidden";
 
   return (
     <nav className={baseClasses}>
@@ -63,12 +60,13 @@ const Navigation: React.FC<NavigationProps> = ({ isSidebar = false }) => {
         const active = isActive(item.href);
 
         return (
-          <Link
-            key={item.name}
-            to={item.href}
-            className={linkClasses(active)}
-          >
-            <SvgIcon name={item.icon} width="20" height="20" className={iconClasses} />
+          <Link key={item.name} to={item.href} className={linkClasses(active)}>
+            <SvgIcon
+              name={item.icon}
+              width="20"
+              height="20"
+              className={iconClasses}
+            />
             {item.name}
           </Link>
         );

@@ -4,23 +4,25 @@ import "./index.css";
 import App from "app/app";
 
 // Polyfills for modern web APIs used by Tooltips/Modals
-if (!('popover' in HTMLElement.prototype)) {
-  import('@oddbird/popover-polyfill/fn').then(({ apply }) => {
-    apply();
+if (!("popover" in HTMLElement.prototype)) {
+  void import("@oddbird/popover-polyfill/fn").then(({ apply }) => {
+    (apply as () => void)();
   });
 }
 
 if (!("interestTargetElement" in HTMLButtonElement.prototype)) {
-  import("interestfor");
+  void import("interestfor");
 }
 
 if (!("anchorName" in document.documentElement.style)) {
-  import("@oddbird/css-anchor-positioning");
+  void import("@oddbird/css-anchor-positioning");
 }
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
-  throw new Error("Root element not found. Ensure there is a <div id='root'> in your index.html.");
+  throw new Error(
+    "Root element not found. Ensure there is a <div id='root'> in your index.html.",
+  );
 }
 
 ReactDOM.createRoot(rootElement).render(
