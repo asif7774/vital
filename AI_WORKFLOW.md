@@ -11,9 +11,10 @@ This document outlines the standard operating procedures and coding standards fo
 - **Zero-Tolerance for Broken Builds:** Never hand back code that fails linting or the build process. If your changes introduce errors, you must fix them before finishing your task.
 
 ## 2. Strict Linting & TypeScript Compliance
-- **No Linter Suppressions:** Do NOT use `eslint-disable`, `@ts-ignore`, or `@ts-expect-error` unless absolutely unavoidable and explicitly approved by the user. 
+- **No Linter Suppressions & Provide Proper Fixes:** Do NOT use `eslint-disable`, `eslint-disable-next-line`, `eslint-disable-line`, `@ts-ignore`, or `@ts-expect-error` anywhere in the codebase. Disabling linting rules on any line or file is strictly forbidden. You must ALWAYS provide a proper fix for the underlying linting or TypeScript issue instead of bypassing it.
 - **Proper Architectural Fixes:** If you encounter a linting or type error (such as `react-hooks/refs` or `react-hooks/immutability`), you must refactor the code to properly solve the issue (e.g., using proper JSX composition or separating hooks from context providers) rather than disabling the rule.
-- **Strict Typing:** Avoid the use of `any`. Rely on strict, explicit TypeScript interfaces and types.
+- **No `any` Type:** Do not use the `any` type under any circumstances. Always define explicit interfaces, types, or use `unknown` if the type is truly not known.
+- **Strict Typing:** Rely on strict, explicit TypeScript interfaces and types.
 
 ## 3. React Best Practices
 - **No Refs During Render:** Do not pass ref objects to functions or modify them during the render phase. Use proper `useCallback` or effect patterns to handle ref merging.
