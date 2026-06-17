@@ -1,9 +1,10 @@
-import React, { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from 'contexts/AuthContext';
-import Header from 'components/organisms/header';
-import Footer from 'components/organisms/footer';
-import Navigation from 'components/organisms/navigation';
+import React, { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "hooks/useAuth";
+
+import Header from "components/organisms/header";
+import Footer from "components/organisms/footer";
+import Navigation from "components/organisms/navigation";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -27,22 +28,22 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Navigation */}
           <div className="lg:w-64 flex-shrink-0">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Navigation</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Navigation
+              </h2>
               <Navigation isSidebar={true} />
             </div>
           </div>
 
           {/* Main Content */}
           <div className="flex-1">
-            <main className="bg-white rounded-lg shadow-sm">
-              {children}
-            </main>
+            <main className="bg-white rounded-lg shadow-sm">{children}</main>
           </div>
         </div>
       </div>

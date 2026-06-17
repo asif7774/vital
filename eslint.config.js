@@ -85,4 +85,10 @@ export default tseslint.config(
       "no-throw-literal": "error",
     },
   },
+  {
+    files: ["src/contexts/*.{ts,tsx}"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  }
 );

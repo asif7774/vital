@@ -1,12 +1,14 @@
-import React from 'react';
-import Button from 'components/atoms/button';
-import LazyImage from 'components/atoms/lazy-image';
-import Card from 'components/organisms/card';
-import { useToast } from 'contexts/ToastContext';
-import { useModal } from 'contexts/ModalContext';
-import { Tooltip } from 'components/atoms/tooltip';
-import { Tabs } from 'components/organisms/tabs';
-import { Dropdown } from 'components/organisms/dropdown';
+import React from "react";
+import Button from "components/atoms/button";
+import LazyImage from "components/atoms/lazy-image";
+import Card from "components/organisms/card";
+import { useToast } from "hooks/useToast";
+
+import { useModal } from "hooks/useModal";
+
+import { Tooltip } from "components/atoms/tooltip";
+import { Tabs } from "components/organisms/tabs";
+import { Dropdown } from "components/organisms/dropdown";
 
 const Components: React.FC = () => {
   const { showToast } = useToast();
@@ -14,18 +16,32 @@ const Components: React.FC = () => {
 
   const handleOpenModal = () => {
     showModal({
-      title: 'Delete Confirmation',
+      title: "Delete Confirmation",
       content: (
         <p className="text-gray-600">
-          Are you sure you want to delete this item? This action cannot be undone and all data will be permanently lost.
+          Are you sure you want to delete this item? This action cannot be
+          undone and all data will be permanently lost.
         </p>
       ),
       actions: (
         <>
-          <Button variant="ghost" onClick={hideModal}>Cancel</Button>
-          <Button variant="danger" onClick={() => { hideModal(); showToast({ variant: 'success', message: 'Item deleted successfully.' }); }}>Delete</Button>
+          <Button variant="ghost" onClick={hideModal}>
+            Cancel
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              hideModal();
+              showToast({
+                variant: "success",
+                message: "Item deleted successfully.",
+              });
+            }}
+          >
+            Delete
+          </Button>
         </>
-      )
+      ),
     });
   };
 
@@ -39,35 +55,67 @@ const Components: React.FC = () => {
       </div>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-6 border-b pb-2">Toast Notifications</h2>
+        <h2 className="text-2xl font-semibold mb-6 border-b pb-2">
+          Toast Notifications
+        </h2>
         <div className="flex flex-wrap gap-4 items-center">
-          <Button 
-            variant="outline" 
-            onClick={() => showToast({ variant: 'success', title: 'Success!', message: 'Your changes have been saved successfully.' })}
+          <Button
+            variant="outline"
+            onClick={() => {
+              showToast({
+                variant: "success",
+                title: "Success!",
+                message: "Your changes have been saved successfully.",
+              });
+            }}
           >
             Show Success
           </Button>
-          <Button 
-            variant="outline" 
-            onClick={() => showToast({ variant: 'error', title: 'Error', message: 'Failed to save changes. Please try again.' })}
+          <Button
+            variant="outline"
+            onClick={() => {
+              showToast({
+                variant: "error",
+                title: "Error",
+                message: "Failed to save changes. Please try again.",
+              });
+            }}
           >
             Show Error
           </Button>
-          <Button 
-            variant="outline" 
-            onClick={() => showToast({ variant: 'warning', title: 'Warning', message: 'Your session will expire in 5 minutes.' })}
+          <Button
+            variant="outline"
+            onClick={() => {
+              showToast({
+                variant: "warning",
+                title: "Warning",
+                message: "Your session will expire in 5 minutes.",
+              });
+            }}
           >
             Show Warning
           </Button>
-          <Button 
-            variant="outline" 
-            onClick={() => showToast({ variant: 'info', message: 'A new software update is available.' })}
+          <Button
+            variant="outline"
+            onClick={() => {
+              showToast({
+                variant: "info",
+                message: "A new software update is available.",
+              });
+            }}
           >
             Show Info
           </Button>
-          <Button 
-            variant="secondary" 
-            onClick={() => showToast({ variant: 'warning', title: 'Persistent', message: 'I will stay here until you close me!', duration: 0 })}
+          <Button
+            variant="secondary"
+            onClick={() => {
+              showToast({
+                variant: "warning",
+                title: "Persistent",
+                message: "I will stay here until you close me!",
+                duration: 0,
+              });
+            }}
           >
             Show Persistent
           </Button>
@@ -98,39 +146,53 @@ const Components: React.FC = () => {
       <section>
         <h2 className="text-2xl font-semibold mb-6 border-b pb-2">Tabs</h2>
         <div className="bg-white/5 rounded-xl p-6 border border-gray-200 shadow-sm max-w-3xl">
-          <Tabs 
+          <Tabs
             tabs={[
               {
-                id: 'profile',
-                label: 'Profile',
+                id: "profile",
+                label: "Profile",
                 content: (
                   <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Profile Information</h3>
-                    <p className="text-gray-600">This is the profile tab content. You can put forms or personal details here.</p>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      Profile Information
+                    </h3>
+                    <p className="text-gray-600">
+                      This is the profile tab content. You can put forms or
+                      personal details here.
+                    </p>
                   </div>
-                )
+                ),
               },
               {
-                id: 'settings',
-                label: 'Settings',
+                id: "settings",
+                label: "Settings",
                 content: (
                   <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Account Settings</h3>
-                    <p className="text-gray-600">Configure your preferences and account security options here.</p>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      Account Settings
+                    </h3>
+                    <p className="text-gray-600">
+                      Configure your preferences and account security options
+                      here.
+                    </p>
                   </div>
-                )
+                ),
               },
               {
-                id: 'billing',
-                label: 'Billing',
+                id: "billing",
+                label: "Billing",
                 content: (
                   <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Billing History</h3>
-                    <p className="text-gray-600">View your past invoices and manage your payment methods.</p>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      Billing History
+                    </h3>
+                    <p className="text-gray-600">
+                      View your past invoices and manage your payment methods.
+                    </p>
                   </div>
-                )
-              }
-            ]} 
+                ),
+              },
+            ]}
           />
         </div>
       </section>
@@ -139,21 +201,73 @@ const Components: React.FC = () => {
         <h2 className="text-2xl font-semibold mb-6 border-b pb-2">Dropdowns</h2>
         <div className="flex flex-col gap-12 bg-white/5 rounded-xl p-6 border border-gray-200 shadow-sm min-h-[300px]">
           <div className="flex justify-between items-start">
-            <Dropdown 
+            <Dropdown
               items={[
-                { id: '1', label: 'Account Settings', onClick: () => showToast({ title: 'Account Settings', message: 'Navigating to settings', variant: 'info' }) },
-                { id: '2', label: 'Support', onClick: () => showToast({ title: 'Support', message: 'Opening help center', variant: 'info' }) },
-                { id: '3', label: 'Logout', danger: true, onClick: () => showToast({ title: 'Logout', message: 'You have been logged out', variant: 'warning' }) },
+                {
+                  id: "1",
+                  label: "Account Settings",
+                  onClick: () => {
+                    showToast({
+                      title: "Account Settings",
+                      message: "Navigating to settings",
+                      variant: "info",
+                    });
+                  },
+                },
+                {
+                  id: "2",
+                  label: "Support",
+                  onClick: () => {
+                    showToast({
+                      title: "Support",
+                      message: "Opening help center",
+                      variant: "info",
+                    });
+                  },
+                },
+                {
+                  id: "3",
+                  label: "Logout",
+                  danger: true,
+                  onClick: () => {
+                    showToast({
+                      title: "Logout",
+                      message: "You have been logged out",
+                      variant: "warning",
+                    });
+                  },
+                },
               ]}
             >
               <Button variant="primary">Standard Dropdown</Button>
             </Dropdown>
 
-            <Dropdown 
+            <Dropdown
               align="right"
               items={[
-                { id: 'edit', label: 'Edit Post', onClick: () => showToast({ title: 'Edit', message: 'Editing post...', variant: 'info' }) },
-                { id: 'delete', label: 'Delete Post', danger: true, onClick: () => showToast({ title: 'Delete', message: 'Post deleted permanently', variant: 'error' }) },
+                {
+                  id: "edit",
+                  label: "Edit Post",
+                  onClick: () => {
+                    showToast({
+                      title: "Edit",
+                      message: "Editing post...",
+                      variant: "info",
+                    });
+                  },
+                },
+                {
+                  id: "delete",
+                  label: "Delete Post",
+                  danger: true,
+                  onClick: () => {
+                    showToast({
+                      title: "Delete",
+                      message: "Post deleted permanently",
+                      variant: "error",
+                    });
+                  },
+                },
               ]}
             >
               <Button variant="outline">Right Aligned Menu</Button>
@@ -161,38 +275,55 @@ const Components: React.FC = () => {
           </div>
 
           <div className="mt-auto pt-24 pb-8 flex justify-center border-t border-gray-100">
-            <Dropdown 
+            <Dropdown
               items={[
-                { id: 'flip1', label: 'I flipped upwards!', onClick: () => {} },
-                { id: 'flip2', label: 'Because I hit the bottom', onClick: () => {} },
-                { id: 'flip3', label: 'Of the viewport edge', onClick: () => {} },
-                { id: 'flip4', label: 'Super smart, right?', onClick: () => {} },
+                { id: "flip1", label: "I flipped upwards!", onClick: () => {} },
+                {
+                  id: "flip2",
+                  label: "Because I hit the bottom",
+                  onClick: () => {},
+                },
+                {
+                  id: "flip3",
+                  label: "Of the viewport edge",
+                  onClick: () => {},
+                },
+                {
+                  id: "flip4",
+                  label: "Super smart, right?",
+                  onClick: () => {},
+                },
               ]}
             >
-              <Button variant="secondary">Test Viewport Collision (Scroll Down)</Button>
+              <Button variant="secondary">
+                Test Viewport Collision (Scroll Down)
+              </Button>
             </Dropdown>
           </div>
         </div>
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-6 border-b pb-2">Modal Dialogs</h2>
+        <h2 className="text-2xl font-semibold mb-6 border-b pb-2">
+          Modal Dialogs
+        </h2>
         <div className="flex flex-wrap gap-4 items-center">
-          <Button 
-            variant="outline" 
-            onClick={handleOpenModal}
-          >
+          <Button variant="outline" onClick={handleOpenModal}>
             Show Confirmation Modal
           </Button>
         </div>
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-6 border-b pb-2">Button Variants & Sizes</h2>
-        
+        <h2 className="text-2xl font-semibold mb-6 border-b pb-2">
+          Button Variants & Sizes
+        </h2>
+
         <div className="space-y-6">
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">Variants</h3>
+            <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">
+              Variants
+            </h3>
             <div className="flex flex-wrap gap-4 items-center">
               <Button variant="primary">Primary</Button>
               <Button variant="secondary">Secondary</Button>
@@ -204,7 +335,9 @@ const Components: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">Sizes</h3>
+            <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">
+              Sizes
+            </h3>
             <div className="flex flex-wrap gap-4 items-center">
               <Button size="sm">Small</Button>
               <Button size="md">Medium</Button>
@@ -214,12 +347,22 @@ const Components: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">With Icons & Loading</h3>
+            <h3 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wider">
+              With Icons & Loading
+            </h3>
             <div className="flex flex-wrap gap-4 items-center">
               <Button icon="download">Download</Button>
-              <Button icon="arrow-right" iconPosition="right" variant="secondary">Next Step</Button>
+              <Button
+                icon="arrow-right"
+                iconPosition="right"
+                variant="secondary"
+              >
+                Next Step
+              </Button>
               <Button isLoading>Processing...</Button>
-              <Button variant="outline" isLoading icon="save">Saving</Button>
+              <Button variant="outline" isLoading icon="save">
+                Saving
+              </Button>
             </div>
           </div>
         </div>
@@ -271,7 +414,6 @@ const Components: React.FC = () => {
           />
         </div>
       </section>
-
     </div>
   );
 };
