@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from "react";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -33,8 +33,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // Log error details
     if (import.meta.env.DEV) {
-      console.error('[ErrorBoundary] Caught error:', error);
-      console.error('[ErrorBoundary] Component stack:', errorInfo.componentStack);
+      console.error("[ErrorBoundary] Caught error:", error);
+      console.error(
+        "[ErrorBoundary] Component stack:",
+        errorInfo.componentStack,
+      );
     }
 
     // Call optional error handler (e.g., send to error tracking service)
@@ -64,13 +67,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       // Default fallback
       return (
         <div className="min-h-[200px] flex flex-col items-center justify-center p-8">
-          <h2 className="text-xl font-bold text-gray-900">Something went wrong</h2>
+          <h2 className="text-xl font-bold text-gray-900">
+            Something went wrong
+          </h2>
           <p className="text-gray-600 mt-2 text-center">
             An unexpected error occurred. Please try again.
           </p>
           <button
             onClick={this.resetErrorBoundary}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
           >
             Try Again
           </button>

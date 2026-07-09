@@ -2,12 +2,7 @@ import { forwardRef, ComponentProps } from "react";
 import { SvgIcon } from "components/atoms/svg-sprite-loader";
 
 export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "danger"
-  | "link";
+  "primary" | "secondary" | "outline" | "ghost" | "danger" | "link";
 export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 export interface ButtonProps extends ComponentProps<"button"> {
@@ -16,6 +11,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
   icon?: string;
   iconPosition?: "left" | "right";
   isLoading?: boolean;
+  block?: boolean;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
@@ -33,10 +29,10 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-4 py-2 text-base",
-  lg: "px-6 py-3 text-lg",
-  icon: "p-2",
+  sm: "h-7 px-2.5 text-xs",
+  md: "h-9 px-3.5 text-sm",
+  lg: "h-11 px-5 text-base",
+  icon: "h-7 w-7",
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -50,6 +46,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading = false,
       className = "",
       disabled,
+      block = false,
       ...rest
     },
     ref,
@@ -77,10 +74,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const iconSpacing = children && size !== "icon" ? "gap-2" : "";
+    const blockClass = block ? "w-full" : "";
 
     const combinedClassName =
-      `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${iconSpacing} ${className}`.trim();
-
+      `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${blockClass} ${iconSpacing} ${className}`
+        .replace(/\s+/g, " ")
+        .trim();
     return (
       <button
         ref={ref}

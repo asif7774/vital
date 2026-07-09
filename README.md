@@ -18,35 +18,119 @@ Create modern React apps with <b>Vital</b><sup><em>(speed)</em></sup><br>
 
 ## ✨ Features
 
-- 🧩 **Accessible UI Components** - Zero-dependency, WCAG-compliant components (Modal, Toast, Tabs, Dropdown, Tooltip) built with modern HTML5 APIs and React Portals.
-- ⚡️ [React 19](https://react.dev) - Latest React with modern patterns
-- 🦾 [TypeScript 6](https://www.typescriptlang.org/) - Strict typing with latest features
-- 🎨 [Tailwind CSS 4](https://tailwindcss.com/) - Next-gen utility-first CSS with optimized setup
-- 🚀 [Vite 8](https://vitejs.dev/) - Lightning-fast build tool
-- 👑 [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) - Component organization
-- 🗂 [Path Aliases](https://github.com/vitejs/vite/issues/88#issuecomment-762415200) - Clean imports
-- 🎨 [SVG Sprites](SVG_SPRITE_GUIDE.md) - Optimized SVG sprite system with caching
-- 🧪 [Vitest](https://vitest.dev/) - Fast unit testing
-- ☁️ [Netlify](https://www.netlify.com/) - Zero-config deployment
+- 🧩 **Full Atomic Component Library** — Production-ready atoms and organisms with consistent design tokens
+- ⚡️ [React 19](https://react.dev) — Latest React with modern patterns
+- 🦾 [TypeScript 6](https://www.typescriptlang.org/) — Strict typing throughout
+- 🎨 [Tailwind CSS 4](https://tailwindcss.com/) — CSS-first configuration with custom properties
+- 🚀 [Vite 8](https://vitejs.dev/) — Lightning-fast builds
+- 👑 [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) — Scalable component architecture
+- 🗂 [Path Aliases](https://vitejs.dev/config/shared-options.html#resolve-alias) — Clean, consistent imports
+- 🎨 [SVG Sprites](SVG_SPRITE_GUIDE.md) — 84-icon optimized sprite system with caching
+- 🧪 [Vitest](https://vitest.dev/) — Fast unit testing
+- ☁️ [Netlify](https://www.netlify.com/) — Zero-config deployment
 
-### 🎨 Tailwind CSS 4 Optimizations
+---
 
-- **Component Classes**: Pre-built `.btn-primary`, `.card`, `.container-responsive`
-- **Utility Classes**: `.hover-lift`, `.focus-ring`, `.animate-fade-in`
-- **Performance**: Optimized CSS bundle with proper layering
-- **Modern Setup**: CSS-first configuration approach
+## 🧩 Component Library
 
-### 🛠 Development Tools
+All components live under `src/components/` and follow [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/). A live showcase is available at the `/components` route when running the app.
 
-- [ESLint 10](https://eslint.org/) - Latest linting with React/TypeScript rules
-- [Prettier 3.8](https://prettier.io/) - Code formatting
-- [TypeScript ESLint](https://typescript-eslint.io/) - TypeScript-specific linting
-- [Lint-staged](https://github.com/okonet/lint-staged) - Pre-commit hooks
-- [PostCSS](https://postcss.org/) - CSS processing with Autoprefixer
+### Atoms
+
+| Component | Import path | Description |
+|---|---|---|
+| `Button` | `components/atoms/button` | 6 variants × 3 sizes, icon, loading state |
+| `Input` | `components/atoms/input/input` | Label, error, disabled, right-element slot |
+| `Textarea` | `components/atoms/textarea/textarea` | Label, error, disabled |
+| `Select` | `components/atoms/select/select` | Searchable custom dropdown |
+| `Toggle` | `components/atoms/toggle` | 3 sizes (sm / md / lg), label, description |
+| `Stepper` | `components/atoms/stepper` | Number input with min / max / step |
+| `Autosearch` | `components/atoms/autosearch` | Autocomplete with keyboard nav and portal dropdown |
+| `Tooltip` | `components/atoms/tooltip` | 4 positions, configurable delay |
+| `BackButton` | `components/atoms/back-button/back-button` | Wraps `Button` with router `navigate(-1)` |
+| `LazyImage` | `components/atoms/lazy-image` | Intersection-Observer lazy loading |
+| `Card` | `components/atoms/card` | Composable layout — `CardHeader`, `CardTitle`, `CardContent`, `CardFooter` |
+| `SvgIcon` | `components/atoms/svg-sprite-loader` | Renders icons from the SVG sprite |
+| `SvgSpriteLoader` | `components/atoms/svg-sprite-loader` | Loads and caches the sprite at app root |
+| `ErrorBoundary` | `components/atoms/error-boundary` | Class-based error boundary with render-prop API |
+| `AppErrorFallback` | `components/atoms/error-boundary` | Full-page crash UI |
+| `PageErrorFallback` | `components/atoms/error-boundary` | Route-level error UI |
+| `WidgetErrorFallback` | `components/atoms/error-boundary` | Inline section error UI |
+| `Logos.Vite` | `components/atoms/logos` | Vite SVG logo |
+
+### Organisms
+
+| Component | Import path | Description |
+|---|---|---|
+| `Card` | `components/organisms/card` | Link card with icon, title, description, border accent |
+| `Tabs` | `components/organisms/tabs` | Keyboard-navigable WCAG-compliant tab panel |
+| `Dropdown` | `components/organisms/dropdown` | Portal dropdown with viewport-collision flip |
+| `Modal` | `components/organisms/modal` | Focus-trapped modal via context + `useModal` hook |
+| `Toast` / `ToastContainer` | `components/organisms/toast` | Toasts via context + `useToast` hook |
+| `Header` | `components/organisms/header` | App-level navigation header |
+| `Footer` | `components/organisms/footer` | App footer |
+
+### Button Variants
+
+```tsx
+<Button variant="primary" size="sm">Primary</Button>
+<Button variant="secondary" size="md">Secondary</Button>
+<Button variant="outline" size="lg">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="danger">Danger</Button>
+<Button variant="link">Link</Button>
+
+// Icon button
+<Button size="icon" icon="settings" aria-label="Settings" />
+
+// Loading state
+<Button isLoading>Saving...</Button>
+```
+
+### Toggle Sizes
+
+```tsx
+<Toggle size="sm" label="Small" />
+<Toggle size="md" label="Medium" defaultChecked />   {/* default */}
+<Toggle size="lg" label="Large" />
+```
+
+---
+
+## 🎨 Design Tokens
+
+CSS custom properties are defined in `src/index.css` and used across all components:
+
+```css
+:root {
+  --color-brand:       #10b981;   /* brand fill (bg-brand-gradient) */
+  --color-brand-hover: #059669;   /* brand hover */
+}
+```
+
+The primary interactive color (buttons, focus rings, active tabs) uses **blue-600 / blue-500** from Tailwind's palette. Override in `src/index.css` to rebrand the entire system at once.
+
+---
+
+## 🖼 SVG Sprite System
+
+84 icons are bundled in `public/sprites/app-icons.svg`. Regenerate from `icons/` at any time:
+
+```bash
+npm run generate-sprite
+```
+
+Then bump the `version` prop in `src/app/app.tsx` to invalidate browser cache. See [SVG_SPRITE_GUIDE.md](SVG_SPRITE_GUIDE.md) for full documentation.
+
+```tsx
+import { SvgIcon } from 'components/atoms/svg-sprite-loader';
+
+<SvgIcon name="home" width="24" height="24" className="text-blue-600" />
+```
+
+---
 
 ## 🚀 Quick Start
-
-### Create a new project
 
 ```bash
 npx degit asif7774/vital my-awesome-app
@@ -55,140 +139,98 @@ npm install
 npm run dev
 ```
 
-### Or clone directly
+Visit [http://localhost:5200/](http://localhost:5200/) and [http://localhost:5200/components](http://localhost:5200/components) for the component showcase.
 
-```bash
-git clone https://github.com/asif7774/vital.git my-awesome-app
-cd my-awesome-app
-npm install
-npm run dev
-```
+---
 
-## 📋 Setup Checklist
+## 📋 New Project Checklist
 
-When you use this template, follow this checklist to customize it:
+- [ ] Update `name` and `author` in `package.json`
+- [ ] Change `<title>` in `index.html`
+- [ ] Replace favicon in `public/favicon.svg`
+- [ ] Update `public/manifest.webmanifest`
+- [ ] Adjust `--color-brand` in `src/index.css`
+- [ ] Update this README
 
-- [ ] Update `name` and `author` fields in `package.json`
-- [ ] Change the title in `index.html`
-- [ ] Update favicon in `public/favicon.svg`
-- [ ] Modify the manifest in `public/manifest.webmanifest`
-- [ ] Update this README with your project info
+---
 
-## 🛠 Usage
+## 🛠 Scripts
 
-### Development
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server at `localhost:5200` |
+| `npm run build` | TypeScript check + Vite production build |
+| `npm run lint` | ESLint across the whole project |
+| `npm run tsc` | Type-check without emitting |
+| `npm run test` | Run Vitest once |
+| `npm run test:ui` | Run Vitest with browser UI |
+| `npm run preview` | Preview the production build |
+| `npm run generate-sprite` | Rebuild SVG sprite from `icons/` |
 
-Start the development server:
+---
 
-```bash
-npm run dev
-```
+## 🛠 Development Tools
 
-Visit http://localhost:5200/ to see your app.
+- [ESLint 10](https://eslint.org/) — Strict React + TypeScript rules
+- [Prettier 3.9](https://prettier.io/) — Opinionated code formatting
+- [TypeScript ESLint 8](https://typescript-eslint.io/) — TypeScript-specific linting
+- [Lint-staged 17](https://github.com/okonet/lint-staged) — Pre-commit quality gates via Husky
+- [PostCSS](https://postcss.org/) — CSS processing
 
-### Build
+---
 
-Create a production build:
+## 📦 Package Versions
 
-```bash
-npm run build
-```
+| Package | Version |
+|---|---|
+| React | 19.2.7 |
+| TypeScript | 6.0.3 |
+| Tailwind CSS | 4.3.2 |
+| Vite | 8.1.4 |
+| ESLint | 10.6.0 |
+| Prettier | 3.9.4 |
+| Vitest | 4.1.10 |
+| React Router | 7.18.1 |
+| TypeScript ESLint | 8.63.0 |
 
-The built files will be in the `dist` directory.
-
-### Testing
-
-Run tests:
-
-```bash
-npm run test        # Run tests once
-npm run test:ui     # Run tests with UI
-```
-
-### Linting
-
-Check code quality:
-
-```bash
-npm run lint        # Run ESLint
-npm run tsc         # Type check
-```
-
-### Preview
-
-Preview the production build:
-
-```bash
-npm run preview
-```
+---
 
 ## 🚀 Deployment
 
 ### Netlify (Recommended)
 
 1. Go to [Netlify](https://app.netlify.com/start)
-2. Select your repository
-3. Deploy with zero configuration!
+2. Connect your repository
+3. Deploy — zero configuration required
 
-### Other Platforms
+### Any Static Host
 
-The `dist` folder contains static files that can be deployed to any static hosting service.
+The `dist/` folder is self-contained static files deployable to Vercel, GitHub Pages, Cloudflare Pages, or any CDN.
 
-## 🎨 Tailwind CSS 4 Features
-
-This template includes optimized Tailwind CSS 4 setup with:
-
-### Component Classes
-- `.btn-primary` - Primary button styling
-- `.btn-secondary` - Secondary button styling  
-- `.card` - Card component with hover effects
-- `.container-responsive` - Responsive container
-- `.heading-primary` - Main heading styles
-- `.text-code` - Code snippet styling
-
-### Utility Classes
-- `.hover-lift` - Smooth lift animation
-- `.focus-ring` - Consistent focus states
-- `.animate-fade-in` - Fade in animation
-- `.animate-slide-up` - Slide up animation
-
-## 📦 Package Versions
-
-All packages are updated to their latest versions:
-
-- **React**: 19.2.7
-- **TypeScript**: 6.0.3
-- **Tailwind CSS**: 4.3.1
-- **Vite**: 8.0.16
-- **ESLint**: 10.5.0
-- **Vitest**: 4.1.8
-- **React Router**: 7.17.0
+---
 
 ## 🎯 Why Vital?
 
-I created this template because setting up modern React projects with all the latest tooling was becoming a bottleneck for rapid prototyping and development.
+**Vital** eliminates the boilerplate tax on every new React project.
 
-**Vital** provides:
-- ⚡️ **Zero-config setup** - Everything works out of the box
-- 🎨 **Optimized Tailwind CSS 4** - Latest features with component classes
-- 🚀 **Latest tooling** - React 19, TypeScript 6, Vite 8
-- 📦 **One command** - `npx degit asif7774/vital my-app` and you're ready to code
-- 🛠 **Best practices** - ESLint, Prettier, testing, and more
+- ⚡️ **Zero-config** — Everything works out of the box
+- 🧩 **Real component library** — Not just scaffolding; production-ready UI components included
+- 🎨 **Design system ready** — CSS variables, consistent tokens, primary color applied globally
+- 🚀 **Latest tooling** — React 19, TypeScript 6, Vite 8, Tailwind 4
+- 📦 **One command** — `npx degit asif7774/vital my-app`
 
-Perfect for:
-- 🚀 **Rapid prototyping** - Get started in seconds
-- 🎨 **Modern web apps** - Latest React and TypeScript features
-- 🎯 **Production ready** - Optimized build and deployment
-- 👥 **Team projects** - Consistent tooling and standards
+Perfect for rapid prototyping, internal tools, and production web apps.
+
+---
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please open a Pull Request.
 
 ## ⭐ Star this repo
 
-If you found this template helpful, please give it a star! ⭐
+If Vital saved you time, a star goes a long way. ⭐

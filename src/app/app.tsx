@@ -1,24 +1,33 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from 'contexts/AuthContext';
-import { SvgSpriteLoader } from 'components/atoms/svg-sprite-loader';
-import { ErrorBoundary, AppErrorFallback, PageErrorFallback } from 'components/atoms/error-boundary';
+import React, { Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider } from "contexts/AuthContext";
+import { SvgSpriteLoader } from "components/atoms/svg-sprite-loader";
+import {
+  ErrorBoundary,
+  AppErrorFallback,
+  PageErrorFallback,
+} from "components/atoms/error-boundary";
 
-import { ToastProvider } from 'contexts/ToastContext';
-import { ToastContainer } from 'components/organisms/toast/toast-container';
+import { ToastProvider } from "contexts/ToastContext";
+import { ToastContainer } from "components/organisms/toast/toast-container";
 
-import { ModalProvider } from 'contexts/ModalContext';
-import { ModalContainer } from 'components/organisms/modal/modal-container';
+import { ModalProvider } from "contexts/ModalContext";
+import { ModalContainer } from "components/organisms/modal/modal-container";
 
 // Lazy load layouts for better code splitting
-const NormalLayout = React.lazy(() => import('layouts/NormalLayout'));
+const NormalLayout = React.lazy(() => import("layouts/NormalLayout"));
 // AuthLayout is lazy loaded and ready to use when needed for protected routes
 // const AuthLayout = React.lazy(() => import('layouts/AuthLayout'));
 
 // Lazy load pages for better performance
-const Home = React.lazy(() => import('pages/Home'));
-const Icons = React.lazy(() => import('pages/Icons'));
-const Components = React.lazy(() => import('pages/Components'));
+const Home = React.lazy(() => import("pages/Home"));
+const Icons = React.lazy(() => import("pages/Icons"));
+const Components = React.lazy(() => import("pages/Components"));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -32,7 +41,9 @@ const LazyLayoutWrapper = ({
   Layout,
   Page,
 }: {
-  Layout: React.LazyExoticComponent<React.ComponentType<{ children: React.ReactNode }>>;
+  Layout: React.LazyExoticComponent<
+    React.ComponentType<{ children: React.ReactNode }>
+  >;
   Page: React.LazyExoticComponent<React.ComponentType>;
 }) => (
   <ErrorBoundary fallbackRender={PageErrorFallback}>
@@ -58,42 +69,49 @@ function App() {
             {/* SvgSpriteLoader wraps Router to provide context, but loading is deferred internally */}
             <SvgSpriteLoader
               url="/sprites/app-icons.svg"
-              version="1.0.0"
-              // eslint-disable-next-line no-console
-              onLoad={import.meta.env.DEV ? () => { console.log('✅ SVG sprite loaded successfully'); } : undefined}
-              onError={import.meta.env.DEV ? (error) => { console.error('❌ Failed to load SVG sprite:', error); } : undefined}
+              version="1.1.0"
+              onError={
+                import.meta.env.DEV
+                  ? (error) => {
+                      console.error("❌ Failed to load SVG sprite:", error);
+                    }
+                  : undefined
+              }
             >
               <ToastContainer />
               <ModalContainer />
-            <Router>
-              <Suspense fallback={<LoadingSpinner />}>
-                <Routes>
-                {/* Public Routes — each wrapped with page-level error boundary */}
-                <Route
-                  path="/"
-                  element={
-                    <LazyLayoutWrapper Layout={NormalLayout} Page={Home} />
-                  }
-                />
-                <Route
-                  path="/icons"
-                  element={
-                    <LazyLayoutWrapper Layout={NormalLayout} Page={Icons} />
-                  }
-                />
-                <Route
-                  path="/components"
-                  element={
-                    <LazyLayoutWrapper Layout={NormalLayout} Page={Components} />
-                  }
-                />
+              <Router>
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    {/* Public Routes — each wrapped with page-level error boundary */}
+                    <Route
+                      path="/"
+                      element={
+                        <LazyLayoutWrapper Layout={NormalLayout} Page={Home} />
+                      }
+                    />
+                    <Route
+                      path="/icons"
+                      element={
+                        <LazyLayoutWrapper Layout={NormalLayout} Page={Icons} />
+                      }
+                    />
+                    <Route
+                      path="/components"
+                      element={
+                        <LazyLayoutWrapper
+                          Layout={NormalLayout}
+                          Page={Components}
+                        />
+                      }
+                    />
 
-                {/* Catch all route */}
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </Suspense>
-          </Router>
-        </SvgSpriteLoader>
+                    {/* Catch all route */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+                </Suspense>
+              </Router>
+            </SvgSpriteLoader>
           </ModalProvider>
         </ToastProvider>
       </AuthProvider>
