@@ -149,7 +149,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
             id="tooltip-content"
             ref={tooltipRef}
             role="tooltip"
-            className={`absolute z-[9999] bg-gray-900 text-white text-sm px-3 py-1.5 rounded shadow-lg animate-fade-in pointer-events-none transition-opacity duration-200 ${className}`}
+            className={`absolute z-9999 bg-gray-900 text-white text-sm px-3 py-1.5 rounded shadow-lg animate-fade-in pointer-events-none transition-opacity duration-200 ${className}`}
             style={{
               top: `${coords.top}px`,
               left: `${coords.left}px`,

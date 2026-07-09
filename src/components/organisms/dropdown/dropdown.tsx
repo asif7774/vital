@@ -173,7 +173,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           <div
             ref={dropdownRef}
             role="menu"
-            className={`absolute z-[9999] bg-white rounded-lg shadow-xl border border-gray-100 min-w-[200px] flex flex-col overflow-hidden transition-opacity duration-150 ${className}`}
+            className={`absolute z-9999 bg-white rounded-lg shadow-xl border border-gray-100 min-w-[200px] flex flex-col overflow-hidden transition-opacity duration-150 ${className}`}
             style={{
               top: `${coords.top}px`,
               left: `${coords.left}px`,
